@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgg0i5kmrjyd1"]
+
+[ext_resource type="Script" path="res://gdscript_gynth_osc.gd" id="1_1p38a"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_0hufu"]
+mix_rate = 48000.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="gdscript_gynth_osc" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamGenerator_0hufu")
+volume_db = -22.857
+stream_paused = true
+script = ExtResource("1_1p38a")
+
+[node name="Camera3D" type="Camera3D" parent="."]
