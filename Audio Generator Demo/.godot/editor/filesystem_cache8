@@ -1,0 +1,10 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1714241802
+generator.tscn::PackedScene::7481760317798845776::1714241421::0::1::::<><>::res://generator_demo.gd
+generator_audioStreamPlayer.gd::GDScript::-1::1714241421::0::1::::<>AudioStreamPlayer<>::
+generator_audioStreamPlayer.tscn::PackedScene::5869799859656800961::1714241421::0::1::::<><>::res://generator_audioStreamPlayer.gd
+generator_demo.gd::GDScript::-1::1714146841::0::1::::<>Node<>::
+icon.webp::CompressedTexture2D::1536367773991339659::1714135411::1714135415::1::::<><>::
+README.md::TextFile::-1::1714135411::0::1::::<><>::
+::res://bin/::1714241799
+g-synth.gdextension::GDExtension::-1::1714237116::0::1::::<><>::
