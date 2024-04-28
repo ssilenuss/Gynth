@@ -1,0 +1,10 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1714338036
+AudioStreamOscillator.gd::GDScript::-1::1714336552::0::1::::<>AudioStreamOscillator<>::
+generator.gd::GDScript::-1::1714337800::0::1::::<>Node2D<>::
+generator.tscn::PackedScene::6334235683085332795::1714338013::0::1::::<><>::res://generator.gd
+generator_audioStreamPlayer.gd::GDScript::-1::1714242423::0::1::::<>AudioStreamPlayer<>::
+icon.webp::CompressedTexture2D::1536367773991339659::1714135411::1714331636::1::::<><>::
+README.md::TextFile::-1::1714135411::0::1::::<><>::
+::res://bin/::1714338033
+g-synth.gdextension::GDExtension::-1::1714237116::0::1::::<><>::
