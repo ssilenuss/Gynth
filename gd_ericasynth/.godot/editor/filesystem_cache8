@@ -1,0 +1,11 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1714469536
+generator.gd::GDScript::-1::1714427700::0::1::::<>Node<>::
+generator.tscn::PackedScene::7481760317798845776::1714469536::0::1::::<><>::res://generator_demo.gd<>res://oscilloscope.gd
+generator_demo.gd::GDScript::-1::1714429611::0::1::::<>Node<>::
+icon.webp::CompressedTexture2D::1536367773991339659::1710165145::1714344329::1::::<><>::
+oscilloscope.gd::GDScript::-1::1714430869::0::1::::<>ColorRect<>::
+README.md::TextFile::-1::1710165145::0::1::::<><>::
+Output_Mixer.tscn::PackedScene::4250932932255842024::1714469742::0::1::::<><>::res://Output_Mixer2D.gd<>res://Potentiometer.gd
+Output_Mixer2D.gd::GDScript::-1::1714469742::0::1::::<>AudioStreamPlayer<>::
+Potentiometer.gd::GDScript::-1::1714469742::0::1::::<>Node2D<>::
