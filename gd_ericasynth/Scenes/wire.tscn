@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck7d7bmdy3mjj"]
+
+[ext_resource type="Script" path="res://Wire.gd" id="1_e6sa3"]
+[ext_resource type="PackedScene" uid="uid://dgj7dgak3k7mp" path="res://Scenes/wire_end.tscn" id="2_rn4q7"]
+
+[node name="Wire" type="Node"]
+script = ExtResource("1_e6sa3")
+
+[node name="WireEnd0" parent="." instance=ExtResource("2_rn4q7")]
+position = Vector2(25, 52)
+
+[node name="WireEnd1" parent="." instance=ExtResource("2_rn4q7")]
+position = Vector2(106, 71)
