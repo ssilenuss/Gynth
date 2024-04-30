@@ -1,9 +1,11 @@
+Control
+HBoxContainer
+VBoxContainer
+Label
 HSlider
 ColorRect
 Sprite2D
 AudioStreamPlayer
-Control
 Node2D
-VBoxContainer
 AudioStreamPlayer2D
 SubViewport

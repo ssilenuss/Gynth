@@ -1,5 +1,4 @@
 res://Output_Mixer.tscn
-res://Potentiometer.gd
-res://generator.tscn
-res://Output_Mixer2D.gd
-res://Output_Mixer.gd
+res://Scenes/Output_Mixer.tscn
+res://Scripts/Potentiometer.gd
+res://Scenes/Input.gd

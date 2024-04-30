@@ -1,0 +1,405 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1tgiko7seo4w"]
+
+[ext_resource type="Script" path="res://Scenes/Input.gd" id="2_7v8ku"]
+[ext_resource type="Script" path="res://Scripts/Potentiometer.gd" id="2_534qw"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_gfc6q"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_f74mf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ilkcp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_48lvc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dujjb"]
+
+[node name="Output_Mixer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamGenerator_gfc6q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Panel" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Panel3" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel4" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel5" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel6" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel6"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel7" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel7"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel8" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel8"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel9" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel9"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Panel10" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel10"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 6.28319
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="OutputMixer" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/OutputMixer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="IN1" type="VBoxContainer" parent="HBoxContainer/OutputMixer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Input" type="Control" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_7v8ku")
+radius = 20.0
+rim_color = Color(1, 1, 1, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN1"]
+layout_mode = 2
+text = "IN1 LVL"
+horizontal_alignment = 1
+
+[node name="IN1_LVL" type="VBoxContainer" parent="HBoxContainer/OutputMixer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN1_LVL"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN1_LVL"]
+layout_mode = 2
+text = "IN1 LVL"
+horizontal_alignment = 1
+
+[node name="IN2_LVL" type="VBoxContainer" parent="HBoxContainer/OutputMixer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN2_LVL"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
+max_value = 1.0
+step = 0.0
+value = 0.01
+script = ExtResource("2_534qw")
+radius = 20.0
+line_color = Color(1, 1, 1, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN2_LVL"]
+layout_mode = 2
+text = "IN2 LVL"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/OutputMixer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel11" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[connection signal="resized" from="HBoxContainer/Panel3" to="HBoxContainer/Panel3/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel4" to="HBoxContainer/Panel4/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel5" to="HBoxContainer/Panel5/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel6" to="HBoxContainer/Panel6/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel7" to="HBoxContainer/Panel7/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel8" to="HBoxContainer/Panel8/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel9" to="HBoxContainer/Panel9/Potentiometer" method="_on_panel_resized"]
+[connection signal="resized" from="HBoxContainer/Panel10" to="HBoxContainer/Panel10/Potentiometer" method="_on_panel_resized"]
