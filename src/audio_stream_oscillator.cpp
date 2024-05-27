@@ -72,6 +72,7 @@ void AudioStreamOscillator::_ready(){
 
 
 void AudioStreamOscillator::set_generating(bool _value){
+
 	generating = _value;
 }
 bool AudioStreamOscillator::get_generating(){
@@ -100,7 +101,7 @@ void AudioStreamOscillator::_fill_buffer() {
 
 	double increment = frequency/mix_rate;
 	Ref<AudioStreamGeneratorPlayback> playback = this->get_stream_playback();
-	to_fill = playback->get_frames_available();
+	//to_fill = playback->get_frames_available();
 	UtilityFunctions::print(increment);
 	
 	while (to_fill > 0){

@@ -1,1 +1,6 @@
+Control
+HSlider
+Osc2D
+AudioStreamPlayer2D
+AudioListener2D
 AudioStreamOscillator
