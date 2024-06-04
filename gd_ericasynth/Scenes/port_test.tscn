@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Port_testOld.gd" id="1_db6b4"]
 [ext_resource type="PackedScene" uid="uid://ck7d7bmdy3mjj" path="res://Scenes/wire.tscn" id="2_wism1"]
-[ext_resource type="Script" path="res://Scripts/SocketOld.gd" id="3_totpc"]
+[ext_resource type="Script" path="res://Scripts/Socket.gd" id="3_totpc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_13aho"]
 radius = 50.0

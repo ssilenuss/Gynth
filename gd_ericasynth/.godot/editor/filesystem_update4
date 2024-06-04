@@ -4,3 +4,7 @@ res://Scripts/Socket.gd
 res://Scenes/Socket_Test.tscn
 res://Scripts/Port_testOld.gd
 res://Scripts/Socket_Test.gd
+res://Scripts/WireEnd.gd
+res://Scripts/Wire.gd
+res://Scenes/wire.tscn
+res://Scenes/wire_end.tscn

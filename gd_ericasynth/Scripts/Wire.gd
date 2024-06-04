@@ -1,6 +1,6 @@
 extends Node2D
 class_name Wire
-#@export var segment : PackedScene
+
 @export var segments : int = 3
 
 
@@ -14,6 +14,7 @@ var final_pinjoint: PinJoint2D
 
 
 func _ready() -> void:
+	end0.wire = self
 	prev_segment = $WireSegment
 	final_pinjoint = $PinJoint2D4
 	
@@ -23,6 +24,7 @@ func _ready() -> void:
 	end1 = end.duplicate()
 	end1.position = final_pinjoint.position
 	end1.input = false
+	end1.wire = self
 
 	add_child(end1)
 	final_pinjoint.set_node_b(end1.get_path())
