@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://duoytfnx2pgka"]
 
-[ext_resource type="Script" path="res://Scenes/wire_segment.gd" id="1_wwcw6"]
+[ext_resource type="Script" path="res://Scripts/wire_segment.gd" id="1_wwcw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i0j2d"]
-radius = 5.0
-height = 20.0
+radius = 3.0
+height = 40.0
 
 [node name="WireSegment" type="RigidBody2D"]
 script = ExtResource("1_wwcw6")
@@ -18,14 +18,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -11.0
-offset_right = 6.0
-offset_bottom = 11.0
+offset_left = -2.5
+offset_top = -20.0
+offset_right = 2.5
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="PinJoint" type="PinJoint2D" parent="."]
-position = Vector2(0, -11)
-node_b = NodePath("..")
+color = Color(1, 1, 0, 1)
+metadata/_edit_use_anchors_ = true

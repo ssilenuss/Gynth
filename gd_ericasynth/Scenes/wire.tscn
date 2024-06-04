@@ -1,13 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck7d7bmdy3mjj"]
+[gd_scene load_steps=5 format=3 uid="uid://ck7d7bmdy3mjj"]
 
-[ext_resource type="Script" path="res://Wire.gd" id="1_e6sa3"]
+[ext_resource type="Script" path="res://Scripts/WireOld.gd" id="1_ilx5w"]
+[ext_resource type="PackedScene" uid="uid://duoytfnx2pgka" path="res://Scenes/wire_segment.tscn" id="2_03syp"]
 [ext_resource type="PackedScene" uid="uid://dgj7dgak3k7mp" path="res://Scenes/wire_end.tscn" id="2_rn4q7"]
 
-[node name="Wire" type="Node"]
-script = ExtResource("1_e6sa3")
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pi115"]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[node name="Wire" type="Node2D"]
+script = ExtResource("1_ilx5w")
+segments = 50
 
 [node name="WireEnd0" parent="." instance=ExtResource("2_rn4q7")]
-position = Vector2(25, 52)
+collision_layer = 4
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+rotation = 1.5708
+node_a = NodePath("../WireEnd0")
+node_b = NodePath("../WireSegment")
+softness = 1.0
+angular_limit_lower = -1.05243
+angular_limit_upper = 0.893609
+
+[node name="WireSegment" parent="." instance=ExtResource("2_03syp")]
+position = Vector2(5, 0)
+rotation = 1.5708
+collision_layer = 2
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_pi115")
+gravity_scale = 0.5
+inertia = 1000.0
+angular_damp = 1000.0
+size = Vector2(6, 10)
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2(10, 0)
+rotation = 1.5708
+softness = 1.0
+angular_limit_lower = -0.605629
+angular_limit_upper = 0.605629
 
 [node name="WireEnd1" parent="." instance=ExtResource("2_rn4q7")]
-position = Vector2(106, 71)
+position = Vector2(10, 0)
+collision_layer = 4
+collision_mask = 9

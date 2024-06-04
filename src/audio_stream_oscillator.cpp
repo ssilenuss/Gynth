@@ -19,9 +19,9 @@ void AudioStreamOscillator::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_mix_rate", "_value"), &AudioStreamOscillator::set_mix_rate);
 	ClassDB::add_property("AudioStreamOscillator", PropertyInfo(Variant::FLOAT, "mix_rate"), "set_mix_rate", "get_mix_rate");
 
-	ClassDB::bind_method(D_METHOD("get_to_fill"), &AudioStreamOscillator::get_to_fill);
-	ClassDB::bind_method(D_METHOD("set_to_fill", "_value"), &AudioStreamOscillator::set_to_fill);
-	ClassDB::add_property("AudioStreamOscillator", PropertyInfo(Variant::INT, "to_fill"), "set_to_fill", "get_to_fill");
+	ClassDB::bind_method(D_METHOD("get_playback"), &AudioStreamOscillator::get_playback);
+	ClassDB::bind_method(D_METHOD("set_playback", "_value"), &AudioStreamOscillator::set_playback);
+
 
 	ClassDB::bind_method(D_METHOD("_fill_buffer"), &AudioStreamOscillator::_fill_buffer);
 }
@@ -36,6 +36,15 @@ AudioStreamOscillator::AudioStreamOscillator() {
 	
 	
 }
+
+void AudioStreamOscillator::set_playback(Ref<AudioStreamGeneratorPlayback> _playback){
+    playback = _playback;
+}
+
+Ref<AudioStreamGeneratorPlayback> AudioStreamOscillator::get_playback(){
+    return this->playback;
+}
+
 
 AudioStreamOscillator::~AudioStreamOscillator() {
 	// Add your cleanup here.
@@ -74,17 +83,18 @@ void AudioStreamOscillator::_ready(){
 void AudioStreamOscillator::set_generating(bool _value){
 
 	generating = _value;
+	if (generating){
+		play();
+		playback = this->get_stream_playback();
+
+	} else {
+		stop();
+	}
 }
 bool AudioStreamOscillator::get_generating(){
 	return generating;
 }
 
-void AudioStreamOscillator::set_to_fill(int _value){
-	to_fill = _value;
-}
-int AudioStreamOscillator::get_to_fill(){
-	return generating;
-}
 
 
 void AudioStreamOscillator::_process(double delta){
@@ -100,9 +110,9 @@ void AudioStreamOscillator::_process(double delta){
 void AudioStreamOscillator::_fill_buffer() {
 
 	double increment = frequency/mix_rate;
-	Ref<AudioStreamGeneratorPlayback> playback = this->get_stream_playback();
-	//to_fill = playback->get_frames_available();
-	UtilityFunctions::print(increment);
+	//Ref<AudioStreamGeneratorPlayback> playback = this->get_stream_playback();
+	to_fill = playback->get_frames_available();
+	//UtilityFunctions::print(increment);
 	
 	while (to_fill > 0){
 		playback->push_frame(Vector2(1.0,1.0)*sin(phase * Math_TAU));

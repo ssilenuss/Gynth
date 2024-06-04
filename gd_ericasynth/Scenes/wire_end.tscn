@@ -1,14 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgj7dgak3k7mp"]
 
-[ext_resource type="Script" path="res://WireEnd.gd" id="1_hpxyk"]
+[ext_resource type="Script" path="res://Scripts/WireEndOld.gd" id="1_hpxyk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_shcqo"]
 
-[node name="WireEnd" type="StaticBody2D"]
+[node name="WireEnd" type="RigidBody2D"]
+input_pickable = true
+gravity_scale = 0.0
+freeze = true
+freeze_mode = 1
 script = ExtResource("1_hpxyk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_shcqo")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
-node_a = NodePath("..")
+[connection signal="input_event" from="." to="." method="_on_input_event"]

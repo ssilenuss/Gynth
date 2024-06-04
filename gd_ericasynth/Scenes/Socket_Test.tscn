@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://diemc0dp2hyb8"]
+
+[ext_resource type="Script" path="res://Scripts/Socket_Test.gd" id="1_ncb2r"]
+[ext_resource type="Script" path="res://Scripts/Socket.gd" id="2_1ievc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13aho"]
+radius = 50.0
+
+[node name="SocketTest" type="Node2D"]
+script = ExtResource("1_ncb2r")
+
+[node name="in" type="Area2D" parent="."]
+position = Vector2(341, 190)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_1ievc")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="in"]
+shape = SubResource("CircleShape2D_13aho")

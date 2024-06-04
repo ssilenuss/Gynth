@@ -48,8 +48,7 @@ namespace godot {
 
 		void fill_buffer();
 		
-		int get_to_fill();
-		void set_to_fill(int _value);
+
 	};
 
 }

@@ -17,10 +17,14 @@ namespace godot {
 		double phase= 0.0;
 		double mix_rate= 48000.0;
 		bool generating = false;
-		int to_fill = 0;
+		
+
+		Ref<AudioStreamGeneratorPlayback> playback;
+       
 	
 
 	private:
+		int to_fill = 0;
 		
 		
 	protected:
@@ -46,9 +50,10 @@ namespace godot {
 		bool get_generating();
 
 		void _fill_buffer();
-		
-		int get_to_fill();
-		void set_to_fill(int _value);
+
+		void set_playback(Ref<AudioStreamGeneratorPlayback> _playback);
+        Ref<AudioStreamGeneratorPlayback> get_playback();
+
 	};
 
 }

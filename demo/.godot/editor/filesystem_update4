@@ -1,4 +1,3 @@
 res://Scenes/2D_Osc.tscn
-res://Scripts/osc_asp_2D.gd
 res://Scenes/OG_Demo.tscn
-res://Scripts/OG_Demo.gd
+res://Scripts/osc_asp_2D.gd

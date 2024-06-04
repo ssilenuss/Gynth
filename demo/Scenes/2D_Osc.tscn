@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/osc_asp_2D.gd" id="1_3tyot"]
 
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_61mah"]
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_w0mkh"]
 mix_rate = 48000.0
 
 [node name="Control" type="Control"]
@@ -34,9 +34,10 @@ tick_count = 10
 ticks_on_borders = true
 
 [node name="2D_Osc" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamGenerator_61mah")
-pitch_scale = 10.0
+stream = SubResource("AudioStreamGenerator_w0mkh")
+pitch_scale = 3.05
+autoplay = true
 script = ExtResource("1_3tyot")
-frequency = 800.0
+frequency = 110.0
 
 [connection signal="value_changed" from="HSlider" to="2D_Osc" method="_on_h_slider_value_changed"]
