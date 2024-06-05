@@ -23,12 +23,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="in" type="Control" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(285, 285)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_vxcp7")
-radius = 50.0
+radius = 142.5
 hole_color = Color(1, 1, 0, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
@@ -43,12 +43,12 @@ script = ExtResource("2_ipkm1")
 debug_node = NodePath("..")
 
 [node name="in2" type="Control" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(285, 285)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_vxcp7")
-radius = 50.0
+radius = 142.5
 hole_color = Color(1, 1, 0, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
@@ -63,12 +63,12 @@ script = ExtResource("2_ipkm1")
 debug_node = NodePath("..")
 
 [node name="out2" type="Control" parent="HBoxContainer" node_paths=PackedStringArray("data")]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(285, 285)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_vxcp7")
-radius = 50.0
+radius = 142.5
 hole_color = Color(0, 1, 1, 1)
 data = NodePath(".")
 rest_color = Color(0, 1, 1, 1)
@@ -83,12 +83,12 @@ script = ExtResource("2_ipkm1")
 debug_node = NodePath("..")
 
 [node name="out" type="Control" parent="HBoxContainer" node_paths=PackedStringArray("data")]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(285, 285)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_vxcp7")
-radius = 50.0
+radius = 142.5
 hole_color = Color(0, 1, 1, 1)
 data = NodePath(".")
 rest_color = Color(0, 1, 1, 1)

@@ -5,6 +5,8 @@ class_name Socket
 signal place_jack()
 signal create_wire(_socket: Socket)
 signal pickup_jack()
+signal wire_connected(_data: Synth_Data)
+signal wire_disconnected()
 
 var center := size/2
 
@@ -23,7 +25,7 @@ func set_radius(_v):
 		rim_color = _v
 		queue_redraw()
 
-@export var data : Node : 
+@export var data : Synth_Data : 
 	set(value):
 		data = value
 
@@ -101,22 +103,23 @@ func _on_mouse_entered() -> void:
 			can_accept = Singleton.held_wire
 			hole_color = action_color
 			queue_redraw()
-			print("can accept: ", can_accept)
+
 		else: 
 			cannot_accept = Singleton.held_wire
 			hole_color = cancel_color
 			queue_redraw()
-			print("cannot accept:  ", cannot_accept)
+
 	else:
 		hole_color = action_color
 		mouse_hover = true
 		queue_redraw()
 func check_mouse_dist()->bool:
 	var close_enough := false
-	var p = center + position
+	var p = center + get_global_transform().origin
 	var m = get_global_mouse_position()
 	close_enough = (p.distance_to(m)<radius)
-	print(close_enough, p.distance_to(m))
+	#print("close enough: ", close_enough, " dist: ", p.distance_to(m))
+	#print("center: ", p, " mouse: ", m, " radius: ", radius)
 	return close_enough
 
 func _on_mouse_exited() -> void:
@@ -138,13 +141,14 @@ func _on_pickup_jack() -> void:
 	if Singleton.held_wire:
 		return
 
-	if input:
-		data = null
+
+	data = null
 	Singleton.held_wire = jack
 	jack.held = true
 	jack.socket = null
 	can_accept = jack
 	jack = null
+	wire_disconnected.emit()
 	hole_color = action_color
 	queue_redraw()
 
@@ -174,19 +178,21 @@ func _on_place_jack() -> void:
 	jack.socket = self
 	can_accept = null
 	Singleton.held_wire = null
-	jack.wire.connect_data()
+	var connected :bool = jack.wire.data_connected()
+	if connected:
+		wire_connected.emit(data)
+		#print("jack placed.  wire connected: ", connected)
 	cannot_accept = null
 	jack.held = false
-	jack.global_transform.origin = self.center + self.position
+	jack.global_transform.origin = self.center + get_global_transform().origin
 	hole_color = rest_color
-	print("jack_placed")
 	queue_redraw()
 
 
 func _on_create_wire(_socket: Socket) -> void:
 
 	var w = wire_scene.instantiate()
-	w.position = _socket.center + _socket.position
+	w.position = _socket.center + _socket.get_global_transform().origin
 	get_tree().get_first_node_in_group("wire_holder").add_child(w)
 
 	

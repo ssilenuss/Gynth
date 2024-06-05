@@ -25,7 +25,7 @@ var line_pos := Vector2(0, -radius)
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
+	value_changed.emit(value)
 	queue_redraw()
 	
 

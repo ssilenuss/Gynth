@@ -5,3 +5,12 @@ res://Scenes/wire.tscn
 res://Scenes/wire_segment.tscn
 res://Scenes/Synth.tscn
 res://Scenes/AudioStreamPlayer.gd
+res://default_bus_layout.tres
+res://Scripts/Singleton.gd
+res://Scripts/gd_osc.gd
+res://Scripts/Wire.gd
+res://Scenes/SynthData.gd
+res://Scripts/SynthAudioPlayer.gd
+res://Scripts/SynthData.gd
+res://Scripts/generator_demo.gd
+res://Scripts/Potentiometer.gd

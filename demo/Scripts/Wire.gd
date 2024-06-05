@@ -83,12 +83,16 @@ func _on_mouse_off_wire() -> void:
 
 	
 
-func connect_data()->void:
-	#if end1.socket.data == null or end0.socket.data = null
-	if end1.input:
-		end1.socket.data = end0.socket.data
-		print ("input:  ", end1.socket.data.get_name(), "  Output:  ", end0.socket.data.get_name())
-	elif end0.input:
+func data_connected()->bool:
+	var d_connected := false
+	if end1.socket.data:
 		end0.socket.data = end1.socket.data
-		print ("input:  ", end0.socket.data.get_name(), "  Output:  ", end1.socket.data.get_name())
-	
+	elif end0.socket.data:
+		end1.socket.data = end0.socket.data
+
+	if end0.socket.data and end1.socket.data:
+		end0.socket.data.connected = true
+		d_connected = true
+	if not d_connected:
+		print("wire not connected.  end0 data: ", end0.socket.data, "  end1 data:", end1.socket.data)
+	return d_connected
