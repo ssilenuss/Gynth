@@ -1,3 +1,7 @@
-res://Scenes/2D_Osc.tscn
-res://Scenes/OG_Demo.tscn
-res://Scripts/osc_asp_2D.gd
+res://Scenes/Socket_Test.tscn
+res://Scripts/Socket.gd
+res://Scenes/wire_end.tscn
+res://Scenes/wire.tscn
+res://Scenes/wire_segment.tscn
+res://Scenes/Synth.tscn
+res://Scenes/AudioStreamPlayer.gd

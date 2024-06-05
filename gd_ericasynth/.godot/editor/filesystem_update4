@@ -8,3 +8,6 @@ res://Scripts/WireEnd.gd
 res://Scripts/Wire.gd
 res://Scenes/wire.tscn
 res://Scenes/wire_end.tscn
+res://Scenes/Synth.tscn
+res://Scripts/wire_segment.gd
+res://Scenes/wire_segment.tscn

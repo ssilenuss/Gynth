@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://d16dr2jiu5n7i"]
+
+[ext_resource type="PackedScene" uid="uid://d2yq6hrbxh74d" path="res://Scenes/AreaSocket.tscn" id="1_b4mi7"]
+
+[node name="SocketTest" type="Node2D"]
+
+[node name="out2" parent="." instance=ExtResource("1_b4mi7")]
+position = Vector2(867, 207)
+
+[node name="out3" parent="." instance=ExtResource("1_b4mi7")]
+position = Vector2(176, 119)
+
+[node name="in1" parent="." node_paths=PackedStringArray("data") instance=ExtResource("1_b4mi7")]
+position = Vector2(555, 100)
+data = NodePath(".")
+rest_color = Color(1, 1, 0, 1)
+input = true
+
+[node name="in2" parent="." node_paths=PackedStringArray("data") instance=ExtResource("1_b4mi7")]
+position = Vector2(287, 368)
+data = NodePath(".")
+rest_color = Color(1, 1, 0, 1)
+input = true
+
+[node name="Node2D" type="Node2D" parent="." groups=["wire_holder"]]

@@ -12,6 +12,7 @@ class_name Wire
 var prev_segment: RigidBody2D
 var final_pinjoint: PinJoint2D
 
+var can_delete := false
 
 func _ready() -> void:
 	end0.wire = self
@@ -31,7 +32,9 @@ func _ready() -> void:
 	end1.held = true
 
 	
-
+func _physics_process(delta: float) -> void:
+	if can_delete and Input.is_action_just_pressed("left_mouse_button"):
+		queue_free()
 	
 func add_segment()->void:
 	
@@ -49,4 +52,28 @@ func add_segment()->void:
 	prev_segment = ws
 	final_pinjoint.set_node_a(prev_segment.get_path())
 
+
+
+
+func _on_mouse_on_wire() -> void:
+	if end0.held or end1.held:
+		return
+	can_delete = true
+	for ws in get_children():
+		if ws.is_in_group("wire_segment"):
+			ws.color = ws.delete_color
+			ws.update_color()
+
+
+
+func _on_mouse_off_wire() -> void:
+	if end0.held or end1.held:
+		return
+	can_delete = false
+	for ws in get_children():
+		if ws.is_in_group("wire_segment"):
+			ws.color = ws.rest_color
+			ws.update_color()
+
+	
 

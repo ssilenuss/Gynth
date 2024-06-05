@@ -1,87 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://diemc0dp2hyb8"]
+[gd_scene load_steps=2 format=3 uid="uid://diemc0dp2hyb8"]
 
-[ext_resource type="Script" path="res://Scripts/Socket_Test.gd" id="1_ncb2r"]
-[ext_resource type="Script" path="res://Scripts/Socket.gd" id="2_1ievc"]
-[ext_resource type="PackedScene" uid="uid://ck7d7bmdy3mjj" path="res://Scenes/wire.tscn" id="2_mgefd"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_13aho"]
-radius = 50.0
+[ext_resource type="PackedScene" uid="uid://d2yq6hrbxh74d" path="res://Scenes/Socket.tscn" id="1_73oa2"]
 
 [node name="SocketTest" type="Node2D"]
-script = ExtResource("1_ncb2r")
-wire = ExtResource("2_mgefd")
 
-[node name="in" type="Area2D" parent="."]
-position = Vector2(341, 190)
-collision_layer = 8
-collision_mask = 4
-script = ExtResource("2_1ievc")
+[node name="out2" parent="." instance=ExtResource("1_73oa2")]
+position = Vector2(867, 207)
+rest_color = Color(0, 1, 1, 1)
+
+[node name="out3" parent="." instance=ExtResource("1_73oa2")]
+position = Vector2(176, 119)
+rest_color = Color(1, 1, 0, 1)
 input = true
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="in"]
-shape = SubResource("CircleShape2D_13aho")
-
-[node name="in2" type="Area2D" parent="."]
-position = Vector2(740, 120)
-collision_layer = 8
-collision_mask = 4
-script = ExtResource("2_1ievc")
-input = true
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="in2"]
-shape = SubResource("CircleShape2D_13aho")
-
-[node name="out" type="Area2D" parent="."]
-position = Vector2(316, 466)
-collision_layer = 8
-collision_mask = 4
-script = ExtResource("2_1ievc")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="out"]
-shape = SubResource("CircleShape2D_13aho")
-
-[node name="out2" type="Area2D" parent="."]
-position = Vector2(861, 456)
-collision_layer = 8
-collision_mask = 4
-script = ExtResource("2_1ievc")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="out2"]
-shape = SubResource("CircleShape2D_13aho")
-
-[connection signal="body_entered" from="in" to="in" method="_on_body_entered"]
-[connection signal="body_exited" from="in" to="in" method="_on_body_exited"]
-[connection signal="create_wire" from="in" to="." method="_on_create_wire"]
-[connection signal="input_event" from="in" to="in" method="_on_input_event"]
-[connection signal="mouse_entered" from="in" to="in" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="in" to="in" method="_on_mouse_exited"]
-[connection signal="pickup_jack" from="in" to="in" method="_on_pickup_jack"]
-[connection signal="place_jack" from="in" to="in" method="_on_place_jack"]
-[connection signal="body_entered" from="in2" to="in2" method="_on_body_entered"]
-[connection signal="body_exited" from="in2" to="in2" method="_on_body_exited"]
-[connection signal="create_wire" from="in2" to="." method="_on_create_wire"]
-[connection signal="input_event" from="in2" to="in2" method="_on_input_event"]
-[connection signal="mouse_entered" from="in2" to="in2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="in2" to="in2" method="_on_mouse_exited"]
-[connection signal="pickup_jack" from="in2" to="in2" method="_on_pickup_jack"]
-[connection signal="place_jack" from="in2" to="in2" method="_on_place_jack"]
-[connection signal="body_entered" from="out" to="out" method="_on_body_entered"]
-[connection signal="body_exited" from="out" to="out" method="_on_body_exited"]
-[connection signal="create_wire" from="out" to="." method="_on_create_wire"]
-[connection signal="input_event" from="out" to="out" method="_on_input_event"]
-[connection signal="mouse_entered" from="out" to="out" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="out" to="out" method="_on_mouse_exited"]
-[connection signal="pickup_jack" from="out" to="out" method="_on_pickup_jack"]
-[connection signal="place_jack" from="out" to="out" method="_on_place_jack"]
-[connection signal="body_entered" from="out2" to="out2" method="_on_body_entered"]
-[connection signal="body_exited" from="out2" to="out2" method="_on_body_exited"]
-[connection signal="create_wire" from="out2" to="." method="_on_create_wire"]
-[connection signal="input_event" from="out2" to="out2" method="_on_input_event"]
-[connection signal="mouse_entered" from="out2" to="out2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="out2" to="out2" method="_on_mouse_exited"]
-[connection signal="pickup_jack" from="out2" to="out2" method="_on_pickup_jack"]
-[connection signal="place_jack" from="out2" to="out2" method="_on_place_jack"]

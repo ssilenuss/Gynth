@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfyltstjpc7c5"]
+
+[ext_resource type="Script" path="res://Scripts/Port_test.gd" id="1_db6b4"]
+[ext_resource type="Script" path="res://Scripts/Socket.gd" id="3_totpc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13aho"]
+radius = 50.0
+
+[node name="WireScene" type="Node2D"]
+script = ExtResource("1_db6b4")
+
+[node name="in" type="Area2D" parent="."]
+position = Vector2(341, 190)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("3_totpc")
+input = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="in"]
+shape = SubResource("CircleShape2D_13aho")
+
+[connection signal="mouse_entered" from="in" to="in" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="in" to="in" method="_on_mouse_exited"]

@@ -1,3 +1,4 @@
+@tool
 extends Area2D
 class_name Socket
 
@@ -5,7 +6,7 @@ signal place_jack()
 signal create_wire(_socket: Socket)
 signal pickup_jack()
 
-
+@export var wire_scene : PackedScene
 @export var radius :float = 50 :
 	set(value):
 		radius = value
@@ -17,7 +18,15 @@ signal pickup_jack()
 @export var output_color := Color(0.0,1.0,1.0,1.0)
 @export var rest_color := Color(0.0,0.0,0.0,1.0)
 
-@export var input := false
+@export var input := false : 
+	set(value):
+		input = value
+		if input:
+			rest_color = input_color
+		else:
+			rest_color = output_color
+		color = rest_color
+		queue_redraw()
 
 
 var jack: WireEnd
@@ -124,3 +133,27 @@ func _on_place_jack() -> void:
 	color = rest_color
 	print("jack_placed")
 	queue_redraw()
+
+
+func _on_create_wire(_socket: Socket) -> void:
+
+	var w = wire_scene.instantiate()
+	w.position = _socket.position
+	get_tree().get_first_node_in_group("wire_holder").add_child(w)
+
+	
+	_socket.jack = w.end0
+	w.end0.socket = _socket
+	w.end0.input = _socket.input
+	w.end1.input = !_socket.input
+	
+	if _socket.input:
+		w.end0.color = _socket.input_color
+		w.end1.color = _socket.output_color
+	else:
+		w.end0.color=_socket.output_color
+		w.end1.color=_socket.input_color
+	
+	print("wire created", w)
+
+	pass # Replace with function body.
