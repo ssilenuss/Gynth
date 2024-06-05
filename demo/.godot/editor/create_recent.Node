@@ -1,6 +1,9 @@
+Synth_Data_LFO
+Synth_Data_CVIN
+Label
+Synth_Data
 AudioStreamPlayer
 Node
-Label
 TextEdit
 VBoxContainer
 Node2D
@@ -10,5 +13,3 @@ Socket
 CollisionShape2D
 Area2D
 PinJoint2D
-WireEnd
-ColorRect

@@ -82,17 +82,30 @@ func _on_mouse_off_wire() -> void:
 			ws.update_color()
 
 	
-
-func data_connected()->bool:
-	var d_connected := false
+func connect_data()->void:
 	if end1.socket.data:
-		end0.socket.data = end1.socket.data
-	elif end0.socket.data:
-		end1.socket.data = end0.socket.data
+		end0.socket.data.connected_to = end1.socket.data
 
-	if end0.socket.data and end1.socket.data:
-		end0.socket.data.connected = true
-		d_connected = true
-	if not d_connected:
-		print("wire not connected.  end0 data: ", end0.socket.data, "  end1 data:", end1.socket.data)
-	return d_connected
+	if end0.socket.data:
+		end1.socket.data.connected_to = end0.socket.data
+		#d_connected = true
+
+#func data_connected()->bool:
+	#var d_connected := false
+	#if end1.socket.data:
+		#end0.socket.data.connected_to = end1.socket.data
+		#d_connected = true
+	#elif end0.socket.data:
+		#end1.socket.data.connected_to = end0.socket.data
+		#d_connected = true
+	##if end1.socket.data:
+		##end0.socket.data = end1.socket.data
+	##elif end0.socket.data:
+		##end1.socket.data = end0.socket.data
+#
+	#if end0.socket.data and end1.socket.data:
+		##end0.socket.data.connected_to = true
+		#d_connected = true
+	#if not d_connected:
+		#print("wire not connected.  end0 data: ", end0.socket.data, "  end1 data:", end1.socket.data)
+	#return d_connected

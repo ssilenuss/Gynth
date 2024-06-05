@@ -1,58 +1,28 @@
-extends Node
+extends AudioStreamPlayer
 class_name Synth_Data
 
-enum {sin_osc, saw_osc, pulse_osc, square_osc}
-@export_enum("sin_osc", "saw_osc", "pulse_osc", "square_osc") var data_type :int= sin_osc
-
-var phase := 0.0
-var frequency := 110.0
-var frame_buffer : PackedVector2Array = []
-
-var connected := false :
+signal wire_connected(_data:Synth_Data)
+signal wire_disconnected(_data:Synth_Data)
+#@export_enum("OSC", "MIXER") var panel_type : int
+var connected_to :Synth_Data= null :
 	set(value):
-		connected = value
+
+		if value != null:
+			connected_to = value
+			wire_connected.emit(value)
+		else:
+			wire_disconnected.emit(connected_to)
+			connected_to = value
+		#print(self, " connected to", connected_to.get_name())
 		
-func fill_buffer(_playback: AudioStreamGeneratorPlayback, _mixrate:float):
-	if not connected:
-		print("Can't fill buffer, synth_data not connected")
-		return
-	var increment := frequency / _mixrate
-	var to_fill: int = _playback.get_frames_available()
-	frame_buffer = []
-	match data_type:
-		sin_osc:
-			while to_fill > 0:
-				frame_buffer.append(Vector2.ONE * sin(phase * TAU))
-				phase = fmod(phase + increment, 1.0)
-				to_fill -= 1
-			frame_buffer.reverse()
-		saw_osc:
-			while to_fill > 0:
-				phase = fmod(phase + increment, 1.0)
-				frame_buffer.append(Vector2.ONE*phase)
-				to_fill -= 1
-			frame_buffer.reverse()
-		pulse_osc:
-			while to_fill > 0:
-				phase = fmod(phase + increment, 1.0)
-				frame_buffer.append(Vector2.ONE*(1.0 -phase))
-				to_fill -= 1
-			frame_buffer.reverse()
-		square_osc:
-			while to_fill > 0:
-				phase = fmod(phase + increment, 1.0)
-				if phase<=0.5:
-					frame_buffer.append(Vector2.ONE)
-				else:
-					frame_buffer.append(Vector2.ZERO)
-				to_fill -= 1
-			frame_buffer.reverse()
+			
 
-func consume_buffer(_playback: AudioStreamGeneratorPlayback)->void:
-	for f in frame_buffer.size():
-		_playback.push_frame(frame_buffer[f])
-	frame_buffer = []
+var bus_idx : int
+var voltage : float = 0.0
 
+func _init() -> void:
+	AudioServer.add_bus()
+	bus_idx = AudioServer.bus_count-1
+	AudioServer.set_bus_mute(bus_idx, true)
 
-func _on_potentiometer_value_changed(value: float) -> void:
-	pass # Replace with function body.
+	

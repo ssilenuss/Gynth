@@ -1,12 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1tgiko7seo4w"]
+[gd_scene load_steps=13 format=3 uid="uid://b1tgiko7seo4w"]
 
 [ext_resource type="Script" path="res://Scripts/Synthesizer.gd" id="1_qryxr"]
 [ext_resource type="Script" path="res://Scripts/Potentiometer.gd" id="1_s2wml"]
 [ext_resource type="Script" path="res://Scripts/Socket.gd" id="2_nsrgt"]
 [ext_resource type="Script" path="res://Scripts/oscilloscope.gd" id="3_cloho"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_Osc.gd" id="4_x6r4a"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_CVIN.gd" id="4_xa1kp"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_LFO.gd" id="5_lsrgm"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_Mixer.gd" id="6_ilo1p"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="7_we1bk"]
 
@@ -242,59 +240,27 @@ script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
 
-[node name="LFO1" type="ColorRect" parent="HBoxContainer"]
+[node name="Panel9" type="ColorRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
 color = Color(0.720467, 0.720468, 0.720467, 1)
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/LFO1"]
+[node name="Potentiometer" type="HSlider" parent="HBoxContainer/Panel9"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.39
+offset_top = -54.39
+offset_right = 54.39
+offset_bottom = 54.39
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="HBoxContainer/LFO1/VBoxContainer2"]
-layout_mode = 2
-text = "LFO 1"
-horizontal_alignment = 1
-
-[node name="CVIN" type="VBoxContainer" parent="HBoxContainer/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="HBoxContainer/LFO1/VBoxContainer2/CVIN"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="CVIN_LFO1" type="AudioStreamPlayer" parent="HBoxContainer/LFO1/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_xa1kp")
-
-[node name="Label" type="Label" parent="HBoxContainer/LFO1/VBoxContainer2/CVIN"]
-layout_mode = 2
-text = "CV IN"
-horizontal_alignment = 1
-
-[node name="Frequency" type="VBoxContainer" parent="HBoxContainer/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="HBoxContainer/LFO1/VBoxContainer2/Frequency"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
+rotation = 6.28319
 theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
 theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
 theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
@@ -307,41 +273,6 @@ value = 0.5
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="HBoxContainer/LFO1/VBoxContainer2/Frequency"]
-layout_mode = 2
-text = "FREQ"
-horizontal_alignment = 1
-
-[node name="OUT" type="VBoxContainer" parent="HBoxContainer/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OutputSocket" type="Control" parent="HBoxContainer/LFO1/VBoxContainer2/OUT"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(0, 1, 1, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(0, 1, 1, 1)
-
-[node name="LFO1" type="AudioStreamPlayer" parent="HBoxContainer/LFO1/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("5_lsrgm")
-
-[node name="Label" type="Label" parent="HBoxContainer/LFO1/VBoxContainer2/OUT"]
-layout_mode = 2
-text = "OUT"
-horizontal_alignment = 1
-
-[node name="Oscilloscope" type="ColorRect" parent="HBoxContainer/LFO1/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_cloho")
 
 [node name="Oscillator1" type="ColorRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
@@ -381,9 +312,6 @@ rim_color = Color(1, 1, 1, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
 
-[node name="CVIN_Osc1" type="AudioStreamPlayer" parent="HBoxContainer/Oscillator1/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_xa1kp")
-
 [node name="Label" type="Label" parent="HBoxContainer/Oscillator1/VBoxContainer2/CVIN"]
 layout_mode = 2
 text = "CV IN"
@@ -418,7 +346,7 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="OutputSocket" type="Control" parent="HBoxContainer/Oscillator1/VBoxContainer2/OUT"]
+[node name="OutputSocket" type="Control" parent="HBoxContainer/Oscillator1/VBoxContainer2/OUT" node_paths=PackedStringArray("data")]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -427,6 +355,7 @@ script = ExtResource("2_nsrgt")
 radius = 21.51
 hole_color = Color(0, 1, 1, 1)
 rim_color = Color(1, 1, 1, 1)
+data = NodePath("../../../../Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2")
 rest_color = Color(0, 1, 1, 1)
 
 [node name="Osc1" type="AudioStreamPlayer" parent="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket"]
@@ -463,7 +392,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/Oscillator2/VBoxContainer2"]
 layout_mode = 2
-text = "OSC 2"
+text = "OSC 1"
 horizontal_alignment = 1
 
 [node name="CVIN" type="VBoxContainer" parent="HBoxContainer/Oscillator2/VBoxContainer2"]
@@ -481,9 +410,6 @@ hole_color = Color(1, 1, 0, 1)
 rim_color = Color(1, 1, 1, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
-
-[node name="CVIN_osc2" type="AudioStreamPlayer" parent="HBoxContainer/Oscillator2/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_xa1kp")
 
 [node name="Label" type="Label" parent="HBoxContainer/Oscillator2/VBoxContainer2/CVIN"]
 layout_mode = 2
@@ -519,7 +445,7 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="OutputSocket" type="Control" parent="HBoxContainer/Oscillator2/VBoxContainer2/OUT"]
+[node name="OutputSocket" type="Control" parent="HBoxContainer/Oscillator2/VBoxContainer2/OUT" node_paths=PackedStringArray("data")]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -528,6 +454,7 @@ script = ExtResource("2_nsrgt")
 radius = 21.51
 hole_color = Color(0, 1, 1, 1)
 rim_color = Color(1, 1, 1, 1)
+data = NodePath("Osc2")
 rest_color = Color(0, 1, 1, 1)
 
 [node name="Osc2" type="AudioStreamPlayer" parent="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket"]
@@ -595,7 +522,7 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Input_Mixer1" type="Control" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN1"]
+[node name="Input_Mixer1" type="Control" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN1" node_paths=PackedStringArray("data")]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -604,6 +531,7 @@ script = ExtResource("2_nsrgt")
 radius = 21.51
 hole_color = Color(1, 1, 0, 1)
 rim_color = Color(1, 1, 1, 1)
+data = NodePath("Mixer1")
 rest_color = Color(1, 1, 0, 1)
 input = true
 
@@ -619,7 +547,7 @@ horizontal_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Input_Mixer2" type="Control" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN2"]
+[node name="Input_Mixer2" type="Control" parent="HBoxContainer/OutputMixer/VBoxContainer2/IN2" node_paths=PackedStringArray("data")]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -628,6 +556,7 @@ script = ExtResource("2_nsrgt")
 radius = 21.51
 hole_color = Color(1, 1, 0, 1)
 rim_color = Color(1, 1, 1, 1)
+data = NodePath("Mixer2")
 rest_color = Color(1, 1, 0, 1)
 input = true
 
@@ -679,7 +608,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
-value = 1.0
+value = 0.8
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -709,7 +638,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
 script = ExtResource("7_we1bk")
-test_node = NodePath("../../HBoxContainer/LFO1/VBoxContainer2/OUT/OutputSocket/LFO1")
+test_node = NodePath("../../HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2")
 
 [connection signal="resized" from="HBoxContainer/Panel3" to="HBoxContainer/Panel3/Potentiometer" method="_on_panel_resized"]
 [connection signal="resized" from="HBoxContainer/Panel4" to="HBoxContainer/Panel4/Potentiometer" method="_on_panel_resized"]
@@ -717,11 +646,17 @@ test_node = NodePath("../../HBoxContainer/LFO1/VBoxContainer2/OUT/OutputSocket/L
 [connection signal="resized" from="HBoxContainer/Panel6" to="HBoxContainer/Panel6/Potentiometer" method="_on_panel_resized"]
 [connection signal="resized" from="HBoxContainer/Panel7" to="HBoxContainer/Panel7/Potentiometer" method="_on_panel_resized"]
 [connection signal="resized" from="HBoxContainer/Panel8" to="HBoxContainer/Panel8/Potentiometer" method="_on_panel_resized"]
-[connection signal="value_changed" from="HBoxContainer/LFO1/VBoxContainer2/Frequency/Potentiometer" to="HBoxContainer/LFO1/VBoxContainer2/OUT/OutputSocket/LFO1" method="_on_modify_frequency"]
-[connection signal="send_cv" from="HBoxContainer/Oscillator1/VBoxContainer2/CVIN/Input/CVIN_Osc1" to="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" method="_on_cv_in"]
+[connection signal="resized" from="HBoxContainer/Panel9" to="HBoxContainer/Panel9/Potentiometer" method="_on_panel_resized"]
 [connection signal="value_changed" from="HBoxContainer/Oscillator1/VBoxContainer2/Frequency/Potentiometer" to="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" method="modify_frequency"]
-[connection signal="send_cv" from="HBoxContainer/Oscillator2/VBoxContainer2/CVIN/Input/CVIN_osc2" to="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" method="_on_cv_in"]
+[connection signal="wire_connected" from="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" to="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" method="_on_wire_connected"]
+[connection signal="wire_disconnected" from="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" to="HBoxContainer/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" method="_on_wire_disconnected"]
 [connection signal="value_changed" from="HBoxContainer/Oscillator2/VBoxContainer2/Frequency/Potentiometer" to="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" method="modify_frequency"]
+[connection signal="wire_connected" from="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" to="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" method="_on_wire_connected"]
+[connection signal="wire_disconnected" from="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" to="HBoxContainer/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" method="_on_wire_disconnected"]
 [connection signal="value_changed" from="HBoxContainer/OutputMixer/VBoxContainer2/IN1_LVL/Potentiometer" to="HBoxContainer/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1" method="_on_mixer_level"]
+[connection signal="wire_connected" from="HBoxContainer/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1" to="HBoxContainer/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1" method="_on_wire_connected"]
+[connection signal="wire_disconnected" from="HBoxContainer/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1" to="HBoxContainer/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1" method="_on_wire_disconnected"]
+[connection signal="wire_connected" from="HBoxContainer/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" to="HBoxContainer/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" method="_on_wire_connected"]
+[connection signal="wire_disconnected" from="HBoxContainer/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" to="HBoxContainer/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" method="_on_wire_disconnected"]
 [connection signal="value_changed" from="HBoxContainer/OutputMixer/VBoxContainer2/IN2_LVL/Potentiometer" to="HBoxContainer/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" method="_on_mixer_level"]
 [connection signal="value_changed" from="HBoxContainer/OutputMixer/VBoxContainer2/MIX LVL/Potentiometer" to="HBoxContainer/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" method="_on_master_level"]

@@ -5,8 +5,8 @@ class_name Socket
 signal place_jack()
 signal create_wire(_socket: Socket)
 signal pickup_jack()
-signal wire_connected(_data: Synth_Data)
-signal wire_disconnected()
+#signal wire_connected(_data: Synth_Data)
+#signal wire_disconnected(_data: Synth_Data)
 
 var center := size/2
 
@@ -25,7 +25,7 @@ func set_radius(_v):
 		rim_color = _v
 		queue_redraw()
 
-@export var data : Synth_Data : 
+var data : Synth_Data : 
 	set(value):
 		data = value
 
@@ -64,6 +64,7 @@ func _ready()->void:
 	pickup_jack.connect(_on_pickup_jack)
 	create_wire.connect(_on_create_wire)
 	resized.connect(socket_resized)
+	data = get_child(0)
 func socket_resized()->void:
 	set_radius(min(size.x, size.y)/2)
 	queue_redraw()
@@ -140,15 +141,15 @@ func _on_pickup_jack() -> void:
 	
 	if Singleton.held_wire:
 		return
-
-
-	data = null
+	data.connected_to = null
+	#wire_disconnected.emit(data)
+	#data = null
 	Singleton.held_wire = jack
 	jack.held = true
 	jack.socket = null
 	can_accept = jack
 	jack = null
-	wire_disconnected.emit()
+	
 	hole_color = action_color
 	queue_redraw()
 
@@ -165,8 +166,8 @@ func check_socket_data()->void:
 		Singleton.held_wire = null
 
 func clear_socket_data()->void:
-	if input:
-		data = null
+	#if input:
+		#data = null
 	jack = null
 	can_accept = null
 	cannot_accept = null
@@ -178,10 +179,8 @@ func _on_place_jack() -> void:
 	jack.socket = self
 	can_accept = null
 	Singleton.held_wire = null
-	var connected :bool = jack.wire.data_connected()
-	if connected:
-		wire_connected.emit(data)
-		#print("jack placed.  wire connected: ", connected)
+	#var connected :bool = jack.wire.data_connected()
+	jack.wire.connect_data()
 	cannot_accept = null
 	jack.held = false
 	jack.global_transform.origin = self.center + get_global_transform().origin
