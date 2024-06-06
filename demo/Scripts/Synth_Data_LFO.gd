@@ -3,9 +3,18 @@ class_name Synth_Data_LFO
 
 enum {SIN,SAW, PULSE, SQUARE}
 @export_enum("SIN", "SAW", "PULSE", "SQUARE") var osc_type :int
-@export var frequency := 1.0
+
 
 var phase := 0.0
+
+var freq_cv := 0.0
+var freq_pot := 0.0
+#var freq_cv_in := 0.0
+
+var attn_cv := 0.0
+var attn_pot := 0.0
+#var attn_cv_in := 0.0
+
 	
 var generating := false :
 	set(value):
@@ -22,7 +31,7 @@ func _process(delta: float) -> void:
 		
 func oscillate_voltage(delta:float):
 	#increment = 1 second / frequency 
-	var increment := 1.0/frequency * delta
+	var increment := 1.0/freq_cv * delta
 	
 	match osc_type:
 		SIN:
@@ -42,19 +51,17 @@ func oscillate_voltage(delta:float):
 				voltage = 1.0
 			else:
 				voltage = 0.0
-
+	voltage *= attn_cv
 
 
 func _on_modify_frequency(value:float)->void:
 	#value should be 0.0-1.0
 	#(how many seconds for a wave.  0.001 = 1000x a second
-	frequency = lerpf(10, 0.01, value)
-
-
+	#frequency = lerpf(10, 0.01, value)
+	freq_cv = Singleton.logerp(100.0, 0.01, value+freq_pot )
 
 func _on_modify_amplitude(value:float)->void:
-	#value should be 0.0-1.0
-	pass
+	attn_cv = value+attn_pot
 
 
 func _on_wire_connected(_data: Synth_Data) -> void:
@@ -66,13 +73,16 @@ func _on_wire_disconnected(_data: Synth_Data) -> void:
 	print(get_name(), " disconnected_from" , connected_to.get_name(),"  Generating: ", generating)
 
 
+func _on_attn_cv_in(value: float)->void:
+	_on_modify_amplitude(value)
 
-
-func _on_cv_in(value: float) -> void:
+func _on_freq_cv_in(value:float)->void:
 	_on_modify_frequency(value)
-	#print(value)
-	pass # Replace with function body.
 
+func _on_potentiometer_frequency_value_changed(value: float) -> void:
+	freq_pot = value
+	_on_modify_frequency(0.0)
 
-func _on_potentiometer_value_changed(value: float) -> void:
-	pass # Replace with function body.
+func _on_potentiometer_attenuation_value_changed(value: float) -> void:
+	attn_pot = value
+	_on_modify_amplitude(0.0)

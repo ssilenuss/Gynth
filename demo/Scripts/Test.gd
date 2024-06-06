@@ -5,5 +5,5 @@ extends Label
 
 func _process(delta: float) -> void:
 
-	text =" LFO1 voltage: " + str(test_node.voltage)
+	text =" osc1 effective frequency: " + 	str(test_node.effective_frequency) + 	" pitch_scale: " + str(test_node.get_pitch_scale()) + " pot_val " + str(test_node.pot_val)
 	pass

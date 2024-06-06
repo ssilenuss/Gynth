@@ -50,8 +50,8 @@ func add_segment()->void:
 	var pj :PinJoint2D = final_pinjoint.duplicate()
 	var ws :WireSegment = prev_segment.duplicate()
 	
-	final_pinjoint.position.x+=ws.size.y
-	ws.position.x += ws.size.y
+	final_pinjoint.position.y+=ws.size.y
+	ws.position.y += ws.size.y
 	
 	add_child(ws)
 	add_child(pj)
@@ -65,12 +65,13 @@ func add_segment()->void:
 
 
 func _on_mouse_on_wire() -> void:
-	can_delete = true
-	
-	for ws in get_children():
-		if ws.is_in_group("wire_segment"):
-			ws.color = ws.delete_color
-			ws.update_color()
+	return
+	#can_delete = true
+	#
+	#for ws in get_children():
+		#if ws.is_in_group("wire_segment"):
+			#ws.color = ws.delete_color
+			#ws.update_color()
 
 
 

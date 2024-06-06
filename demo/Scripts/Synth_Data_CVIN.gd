@@ -18,6 +18,8 @@ func _process(delta: float) -> void:
 	if sending:
 		send_cv.emit(connected_to.voltage)
 		
+	
+		
 
 func _on_wire_connected(_data: Synth_Data) -> void:
 	sending = true

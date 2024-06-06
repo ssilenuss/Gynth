@@ -6,6 +6,8 @@ enum {SIN,SAW, PULSE, SQUARE}
 @export var frequency := 110.0
 var mix_rate : float = 48000.0
 var playback = AudioStreamGeneratorPlayback
+var effective_frequency : float
+var pot_val:float
 
 	
 var generating := false :
@@ -30,6 +32,7 @@ func _ready()->void:
 func _process(delta: float) -> void:
 	if generating:
 		fill_buffer()
+
 		
 func fill_buffer():
 	var increment := frequency / mix_rate
@@ -66,8 +69,12 @@ func fill_buffer():
 
 func modify_frequency(value:float)->void:
 	#value should be 0.0-1.0
-	var p :float = lerpf(1.0, 11.0, value)
+	#var p :float = lerpf(1.0, 11.0, value)
+	#var p : float = Singleton.logerp(1.0, 64.0, value)
+	var p = pow(2, (10*(value+pot_val)))
 	set_pitch_scale(p)
+	effective_frequency = pitch_scale*frequency
+	
 
 
 func modify_amplitude(value:float)->void:
@@ -87,6 +94,10 @@ func _on_wire_disconnected(_data: Synth_Data) -> void:
 
 
 func _on_cv_in(value: float) -> void:
-	modify_frequency(value)
-	#print(value)
-	pass # Replace with function body.
+	modify_frequency(value*0.1)
+
+
+func _on_potentiometer_value_changed(value: float) -> void:
+	pot_val = value
+	modify_frequency(0.0)
+
