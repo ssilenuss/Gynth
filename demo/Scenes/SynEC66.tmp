@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1tgiko7seo4w"]
+[gd_scene load_steps=16 format=3 uid="uid://b1tgiko7seo4w"]
 
 [ext_resource type="Script" path="res://Scripts/Potentiometer.gd" id="1_s2wml"]
 [ext_resource type="Script" path="res://Scripts/Socket.gd" id="2_nsrgt"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/Synth_Data_CVIN.gd" id="4_xa1kp"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_LFO.gd" id="5_lsrgm"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_Mixer.gd" id="6_ilo1p"]
-[ext_resource type="Script" path="res://Scenes/Test_Mixer.gd" id="7_ot0aq"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="7_we1bk"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_CVOUT.gd" id="8_s40ll"]
 [ext_resource type="Script" path="res://Scripts/PianoKey.gd" id="10_7ctkf"]
@@ -665,8 +664,7 @@ rest_color = Color(1, 1, 0, 1)
 input = true
 
 [node name="Mixer1" type="AudioStreamPlayer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1/Input_Mixer1"]
-bus = &"New Bus"
-script = ExtResource("7_ot0aq")
+script = ExtResource("6_ilo1p")
 
 [node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1"]
 layout_mode = 2
@@ -1360,7 +1358,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
 script = ExtResource("7_we1bk")
-test_node = NodePath("../../VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1")
+test_node = NodePath("../../VBoxContainer/Synth/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1")
 
 [connection signal="resized" from="VBoxContainer/Synth/Panel3" to="VBoxContainer/Synth/Panel3/Potentiometer" method="_on_panel_resized"]
 [connection signal="resized" from="VBoxContainer/Synth/Panel4" to="VBoxContainer/Synth/Panel4/Potentiometer" method="_on_panel_resized"]

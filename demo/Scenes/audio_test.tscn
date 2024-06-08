@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp6rljlpej60t"]
+
+[ext_resource type="Script" path="res://Scenes/test_oscillator.gd" id="1_xg176"]
+[ext_resource type="Script" path="res://Scenes/Test_Mixer.gd" id="2_3lli7"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_si4w1"]
+mix_rate = 48000.0
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_1l4vf"]
+mix_rate = 48000.0
+
+[node name="AudioTest" type="Node2D"]
+
+[node name="Mixer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("data")]
+stream = SubResource("AudioStreamGenerator_si4w1")
+bus = &"New Bus 6"
+script = ExtResource("2_3lli7")
+data = NodePath("../Osc")
+
+[node name="Osc" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_1l4vf")
+bus = &"New Bus 7"
+script = ExtResource("1_xg176")

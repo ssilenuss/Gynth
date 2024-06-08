@@ -1,12 +1,11 @@
+AudioStreamPlayer
 Label
 HBoxContainer
 VBoxContainer
 ColorRect
 Control
 Synth_Data_LFO
-Synth_Data_CVIN
 Synth_Data
-AudioStreamPlayer
 Node
 TextEdit
 Node2D

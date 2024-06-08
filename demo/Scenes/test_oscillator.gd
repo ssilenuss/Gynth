@@ -1,5 +1,7 @@
-extends Synth_Data
-class_name Synth_Data_Osc
+
+extends  Synth_Data
+class_name test_osc
+
 
 enum {SIN,SAW, PULSE, SQUARE}
 @export_enum("SIN", "SAW", "PULSE", "SQUARE") var osc_type :int
@@ -9,8 +11,11 @@ var playback = AudioStreamGeneratorPlayback
 var effective_frequency : float
 var pot_val:float
 
+
+
+var bus_vol := 0.0
 	
-var generating := false :
+@export var generating := false :
 	set(value):
 		generating = value
 		if generating:
@@ -19,19 +24,19 @@ var generating := false :
 			play()
 			playback = get_stream_playback()
 			fill_buffer()
+
 		else:
 			stop()
-
-func _ready()->void:
-	wire_connected.connect(self._on_wire_connected)
-	wire_disconnected.connect(self._on_wire_disconnected)
-	#AudioServer.set_bus_name(bus_idx, get_name())
-	#set_bus(get_name())
-	#print(get_bus(), " bus created at idx ", bus_idx, ":", AudioServer.get_bus_index(get_name()))
 		
+
+
 func _process(delta: float) -> void:
 	if generating:
 		fill_buffer()
+	if Input.is_action_just_pressed("ui_left"):
+		generating = !generating
+	#print(get_bus(), AudioServer.get_bus_name(bus_idx), AudioServer.get_bus_volume_db(bus_idx))
+
 
 		
 func fill_buffer():
@@ -65,38 +70,4 @@ func fill_buffer():
 				else:
 					playback.push_frame(Vector2.ZERO)
 				to_fill -= 1
-
-
-func modify_frequency(value:float)->void:
-	#value should be 0.0-1.0
-	#var p :float = lerpf(1.0, 11.0, value)
-	#var p : float = Singleton.logerp(1.0, 64.0, value)
-	var p = pow(2, (10*(value+pot_val)))
-	set_pitch_scale(p)
-	effective_frequency = pitch_scale*frequency
-	
-
-
-func modify_amplitude(value:float)->void:
-	#value should be 0.0-1.0
-	pass
-
-
-func _on_wire_connected(_data: Synth_Data) -> void:
-	generating = true
-	print(get_name(), " connecte to" , connected_to.get_name(),"  Generating: ", generating)
-
-func _on_wire_disconnected(_data: Synth_Data) -> void:
-	generating = false
-	print(get_name(), " disconnected_from" , connected_to.get_name(),"  Generating: ", generating)
-
-
-
-func _on_cv_in(value: float) -> void:
-	modify_frequency(value*0.1)
-
-
-func _on_potentiometer_value_changed(value: float) -> void:
-	pot_val = value
-	modify_frequency(0.0)
 

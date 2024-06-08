@@ -45,7 +45,7 @@ func _ready()->void:
 		if key_input[0] is InputEventKey:
 			var keycode :Key= DisplayServer.keyboard_get_keycode_from_physical(key_input[0].physical_keycode)
 			var string :String = OS.get_keycode_string(keycode)
-			print(string)
+			#print(string)
 			if string == "Comma":
 				string = ","
 			elif string == "Apostrophe":
