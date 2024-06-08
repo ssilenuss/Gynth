@@ -1,5 +1,7 @@
 extends Node
 
+var mix_rate :float = 48000.0
+
 var held_wire :WireEnd :
 	set(value):
 		held_wire = value
@@ -8,3 +10,4 @@ var held_wire :WireEnd :
 func logerp(_from:float, _to:float, _t: float)->float:
 	return _from*pow(_to/_from, _t)
 	#return a*pow(b/a, t);
+

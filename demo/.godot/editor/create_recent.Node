@@ -1,11 +1,13 @@
+Audio_Oscillator_GD
 AudioStreamPlayer
+Synth_Data
+Synth_Data_Audio_Osc
+Control
 Label
 HBoxContainer
 VBoxContainer
 ColorRect
-Control
 Synth_Data_LFO
-Synth_Data
 Node
 TextEdit
 Node2D

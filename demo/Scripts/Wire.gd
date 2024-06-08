@@ -91,6 +91,7 @@ func connect_data()->void:
 		end1.socket.data.connected_to = end0.socket.data
 		#d_connected = true
 
+
 #func data_connected()->bool:
 	#var d_connected := false
 	#if end1.socket.data:

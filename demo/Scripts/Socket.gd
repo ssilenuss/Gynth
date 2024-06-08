@@ -5,8 +5,7 @@ class_name Socket
 signal place_jack()
 signal create_wire(_socket: Socket)
 signal pickup_jack()
-#signal wire_connected(_data: Synth_Data)
-#signal wire_disconnected(_data: Synth_Data)
+
 
 var center := size/2
 
@@ -65,9 +64,11 @@ func _ready()->void:
 	create_wire.connect(_on_create_wire)
 	resized.connect(socket_resized)
 	data = get_child(0)
+
 func socket_resized()->void:
 	set_radius(min(size.x, size.y)/2)
 	queue_redraw()
+	
 func _gui_input(event):
 	#print(event)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -141,9 +142,6 @@ func _on_pickup_jack() -> void:
 	
 	if Singleton.held_wire:
 		return
-	data.connected_to = null
-	#wire_disconnected.emit(data)
-	#data = null
 	Singleton.held_wire = jack
 	jack.held = true
 	jack.socket = null
@@ -166,8 +164,6 @@ func check_socket_data()->void:
 		Singleton.held_wire = null
 
 func clear_socket_data()->void:
-	#if input:
-		#data = null
 	jack = null
 	can_accept = null
 	cannot_accept = null
@@ -181,6 +177,8 @@ func _on_place_jack() -> void:
 	Singleton.held_wire = null
 	#var connected :bool = jack.wire.data_connected()
 	jack.wire.connect_data()
+
+
 	cannot_accept = null
 	jack.held = false
 	jack.global_transform.origin = self.center + get_global_transform().origin

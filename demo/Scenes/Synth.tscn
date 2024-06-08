@@ -1,18 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1tgiko7seo4w"]
+[gd_scene load_steps=15 format=3 uid="uid://b1tgiko7seo4w"]
 
 [ext_resource type="Script" path="res://Scripts/Potentiometer.gd" id="1_s2wml"]
+[ext_resource type="Script" path="res://Scripts/Panel.gd" id="1_s8tag"]
 [ext_resource type="Script" path="res://Scripts/Socket.gd" id="2_nsrgt"]
 [ext_resource type="Script" path="res://Scripts/oscilloscope.gd" id="3_cloho"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_Osc.gd" id="4_x6r4a"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_CVIN.gd" id="4_xa1kp"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_LFO.gd" id="5_lsrgm"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_Mixer.gd" id="6_ilo1p"]
-[ext_resource type="Script" path="res://Scenes/Test_Mixer.gd" id="7_ot0aq"]
+[ext_resource type="Script" path="res://Scripts/SynthData.gd" id="3_wb2f1"]
+[ext_resource type="Script" path="res://Scripts/Synth_Data_Audio_Osc.gd" id="5_rds2n"]
+[ext_resource type="Script" path="res://Scripts/Synth_Data_Audio_Mixer.gd" id="7_3o2a4"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="7_we1bk"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_CVOUT.gd" id="8_s40ll"]
 [ext_resource type="Script" path="res://Scripts/PianoKey.gd" id="10_7ctkf"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_gfc6q"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_f74mf"]
 
@@ -22,10 +19,16 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dujjb"]
 
-[node name="Synthesizer" type="AudioStreamPlayer"]
-stream = SubResource("AudioStreamGenerator_gfc6q")
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Synthesizer" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,229 +38,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Synth" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Panels" type="HBoxContainer" parent="Synthesizer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Panel" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Panel3" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Panel3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.39
-offset_top = -54.39
-offset_right = 54.39
-offset_bottom = 54.39
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.28319
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Panel4" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Panel4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.39
-offset_top = -54.39
-offset_right = 54.39
-offset_bottom = 54.39
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.28319
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Panel5" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Panel5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.39
-offset_top = -54.39
-offset_right = 54.39
-offset_bottom = 54.39
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.28319
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Panel6" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Panel6"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.39
-offset_top = -54.39
-offset_right = 54.39
-offset_bottom = 54.39
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.28319
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Panel7" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Panel7"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.39
-offset_top = -54.39
-offset_right = 54.39
-offset_bottom = 54.39
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.28319
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Panel8" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Panel8"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.39
-offset_top = -54.39
-offset_right = 54.39
-offset_bottom = 54.39
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 6.28319
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="LFO1" type="ColorRect" parent="VBoxContainer/Synth"]
+[node name="Oscillator1_GD" type="ColorRect" parent="Synthesizer/Panels"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 color = Color(0.720467, 0.720468, 0.720467, 1)
+script = ExtResource("1_s8tag")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Synth/LFO1"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator1_GD"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -267,166 +61,16 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-layout_mode = 2
-text = "LFO 1"
-horizontal_alignment = 1
-
-[node name="CVIN_Freq" type="VBoxContainer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Freq"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="CVIN_LFO1" type="AudioStreamPlayer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Freq/Input"]
-script = ExtResource("4_xa1kp")
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Freq"]
-layout_mode = 2
-text = "CV IN"
-horizontal_alignment = 1
-
-[node name="Frequency" type="VBoxContainer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/Frequency"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/Frequency"]
-layout_mode = 2
-text = "FREQ"
-horizontal_alignment = 1
-
-[node name="CVIN_Attenuator" type="VBoxContainer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Attenuator"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="CVIN_Attenuator" type="AudioStreamPlayer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Attenuator/Input"]
-script = ExtResource("4_xa1kp")
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Attenuator"]
-layout_mode = 2
-text = "CV IN"
-horizontal_alignment = 1
-
-[node name="Attenuator" type="VBoxContainer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/Attenuator"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/Attenuator"]
-layout_mode = 2
-text = "ATTN"
-horizontal_alignment = 1
-
-[node name="OUT" type="VBoxContainer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OutputSocket" type="Control" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(0, 1, 1, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(0, 1, 1, 1)
-
-[node name="LFO1" type="AudioStreamPlayer" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("5_lsrgm")
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT"]
-layout_mode = 2
-text = "OUT"
-horizontal_alignment = 1
-
-[node name="Oscilloscope" type="ColorRect" parent="VBoxContainer/Synth/LFO1/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_cloho")
-
-[node name="Oscillator1" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2"]
 layout_mode = 2
 text = "OSC 1"
 horizontal_alignment = 1
 
-[node name="CVIN" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2"]
+[node name="CVIN" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Input" type="Control" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/CVIN"]
+[node name="Input" type="Control" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN"]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -438,19 +82,19 @@ rim_color = Color(1, 1, 1, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
 
-[node name="CVIN_Osc1" type="AudioStreamPlayer" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_xa1kp")
+[node name="Synth_Data" type="Node" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN/Input"]
+script = ExtResource("3_wb2f1")
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/CVIN"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN"]
 layout_mode = 2
 text = "CV IN"
 horizontal_alignment = 1
 
-[node name="Frequency" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2"]
+[node name="Frequency" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/Frequency"]
+[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/Frequency"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
@@ -466,16 +110,16 @@ script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/Frequency"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/Frequency"]
 layout_mode = 2
 text = "FREQ"
 horizontal_alignment = 1
 
-[node name="OUT" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2"]
+[node name="OUT" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="OutputSocket" type="Control" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/OUT"]
+[node name="OutputSocket" type="Control" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/OUT"]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -483,32 +127,30 @@ mouse_filter = 1
 script = ExtResource("2_nsrgt")
 radius = 21.51
 hole_color = Color(0, 1, 1, 1)
-rim_color = Color(1, 1, 1, 1)
 rest_color = Color(0, 1, 1, 1)
 
-[node name="Osc1" type="AudioStreamPlayer" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("4_x6r4a")
+[node name="Synth_Data_Audio_Osc" type="Node" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/OUT/OutputSocket"]
+script = ExtResource("5_rds2n")
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2/OUT"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/OUT"]
 layout_mode = 2
 text = "OUT"
 horizontal_alignment = 1
 
-[node name="Oscilloscope" type="ColorRect" parent="VBoxContainer/Synth/Oscillator1/VBoxContainer2"]
+[node name="Oscilloscope" type="ColorRect" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 script = ExtResource("3_cloho")
 
-[node name="Oscillator2" type="ColorRect" parent="VBoxContainer/Synth"]
+[node name="OutputMixer" type="ColorRect" parent="Synthesizer/Panels"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
 color = Color(0.720467, 0.720468, 0.720467, 1)
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Synthesizer/Panels/OutputMixer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -518,116 +160,16 @@ grow_vertical = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2"]
-layout_mode = 2
-text = "OSC 2"
-horizontal_alignment = 1
-
-[node name="CVIN" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/CVIN"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="CVIN_osc2" type="AudioStreamPlayer" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_xa1kp")
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/CVIN"]
-layout_mode = 2
-text = "CV IN"
-horizontal_alignment = 1
-
-[node name="Frequency" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/Frequency"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/Frequency"]
-layout_mode = 2
-text = "FREQ"
-horizontal_alignment = 1
-
-[node name="OUT" type="VBoxContainer" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OutputSocket" type="Control" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/OUT"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(0, 1, 1, 1)
-rim_color = Color(1, 1, 1, 1)
-rest_color = Color(0, 1, 1, 1)
-
-[node name="Osc2" type="AudioStreamPlayer" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("4_x6r4a")
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2/OUT"]
-layout_mode = 2
-text = "OUT"
-horizontal_alignment = 1
-
-[node name="Oscilloscope" type="ColorRect" parent="VBoxContainer/Synth/Oscillator2/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_cloho")
-
-[node name="OutputMixer" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Synth/OutputMixer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
 layout_mode = 2
 text = "OUT MIXR"
 horizontal_alignment = 1
 
-[node name="IN1_LVL" type="VBoxContainer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="IN1_LVL" type="VBoxContainer" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1_LVL"]
+[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1_LVL"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
@@ -643,16 +185,16 @@ script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1_LVL"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1_LVL"]
 layout_mode = 2
 text = "IN1 LVL"
 horizontal_alignment = 1
 
-[node name="IN1" type="VBoxContainer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="IN1" type="VBoxContainer" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Input_Mixer1" type="Control" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1"]
+[node name="Input_Mixer1" type="Control" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1"]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -664,20 +206,20 @@ rim_color = Color(1, 1, 1, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
 
-[node name="Mixer1" type="AudioStreamPlayer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1/Input_Mixer1"]
-bus = &"New Bus"
-script = ExtResource("7_ot0aq")
+[node name="OutMix1" type="Node" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1/Input_Mixer1"]
+script = ExtResource("7_3o2a4")
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1"]
 layout_mode = 2
 text = "IN1 LVL"
 horizontal_alignment = 1
 
-[node name="IN2" type="VBoxContainer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="IN2" type="VBoxContainer" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="Input_Mixer2" type="Control" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2"]
+[node name="Input_Mixer2" type="Control" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2"]
 custom_minimum_size = Vector2(43.02, 43.02)
 layout_mode = 2
 size_flags_vertical = 3
@@ -689,19 +231,20 @@ rim_color = Color(1, 1, 1, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
 
-[node name="Mixer2" type="AudioStreamPlayer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2/Input_Mixer2"]
-script = ExtResource("6_ilo1p")
+[node name="OutMix2" type="Node" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2/Input_Mixer2"]
+script = ExtResource("3_wb2f1")
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2"]
 layout_mode = 2
 text = "IN1 LVL"
 horizontal_alignment = 1
 
-[node name="IN2_LVL" type="VBoxContainer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="IN2_LVL" type="VBoxContainer" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2_LVL"]
+[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2_LVL"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
@@ -717,16 +260,16 @@ script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2_LVL"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2_LVL"]
 layout_mode = 2
 text = "IN2 LVL"
 horizontal_alignment = 1
 
-[node name="MIX LVL" type="VBoxContainer" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="MIX LVL" type="VBoxContainer" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 
-[node name="Potentiometer" type="HSlider" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/MIX LVL"]
+[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/MIX LVL"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
@@ -742,31 +285,26 @@ script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2/MIX LVL"]
+[node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/MIX LVL"]
 layout_mode = 2
 text = "MIX LVL"
 horizontal_alignment = 1
 
-[node name="Oscilloscope" type="ColorRect" parent="VBoxContainer/Synth/OutputMixer/VBoxContainer2"]
+[node name="Oscilloscope" type="ColorRect" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 script = ExtResource("3_cloho")
 
-[node name="Panel11" type="ColorRect" parent="VBoxContainer/Synth"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="Keyboard" type="Control" parent="VBoxContainer"]
+[node name="Keyboard" type="Control" parent="Synthesizer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.27
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Keyboard"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Synthesizer/Keyboard"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -774,17 +312,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sockets" type="HBoxContainer" parent="VBoxContainer/Keyboard/VBoxContainer"]
+[node name="Sockets" type="HBoxContainer" parent="Synthesizer/Keyboard/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="PitchOut" type="VBoxContainer" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets"]
+[node name="PitchOut" type="VBoxContainer" parent="Synthesizer/Keyboard/VBoxContainer/Sockets"]
 layout_mode = 2
 alignment = 1
 
-[node name="Outpt" type="Control" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets/PitchOut"]
+[node name="Outpt" type="Control" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/PitchOut"]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 size_flags_vertical = 3
@@ -795,19 +333,19 @@ hole_color = Color(0, 1, 1, 1)
 rim_color = Color(1, 1, 1, 1)
 rest_color = Color(0, 1, 1, 1)
 
-[node name="Keyboard_Pitch_Out" type="AudioStreamPlayer" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets/PitchOut/Outpt"]
+[node name="Keyboard_Pitch_Out" type="AudioStreamPlayer" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/PitchOut/Outpt"]
 script = ExtResource("8_s40ll")
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets/PitchOut"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/PitchOut"]
 layout_mode = 2
 text = "PITCH"
 horizontal_alignment = 1
 
-[node name="Gate" type="VBoxContainer" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets"]
+[node name="Gate" type="VBoxContainer" parent="Synthesizer/Keyboard/VBoxContainer/Sockets"]
 layout_mode = 2
 alignment = 1
 
-[node name="Outpt" type="Control" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets/Gate"]
+[node name="Outpt" type="Control" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate"]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 size_flags_vertical = 3
@@ -818,20 +356,20 @@ hole_color = Color(0, 1, 1, 1)
 rim_color = Color(1, 1, 1, 1)
 rest_color = Color(0, 1, 1, 1)
 
-[node name="Keyboard_Gate_Out" type="AudioStreamPlayer" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets/Gate/Outpt"]
+[node name="Keyboard_Gate_Out" type="AudioStreamPlayer" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate/Outpt"]
 script = ExtResource("8_s40ll")
 gate = true
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/Sockets/Gate"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate"]
 layout_mode = 2
 text = "GATE"
 horizontal_alignment = 1
 
-[node name="keys" type="HBoxContainer" parent="VBoxContainer/Keyboard/VBoxContainer"]
+[node name="keys" type="HBoxContainer" parent="Synthesizer/Keyboard/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="A" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="A" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -842,7 +380,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/A"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/A"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -861,7 +399,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="A_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/A" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="A_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/A" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.5
@@ -874,7 +412,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/A/A_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/A/A_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -893,7 +431,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="B" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="B" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -904,7 +442,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="B_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/B" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="B_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/B" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.5
@@ -917,7 +455,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/B/B_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/B/B_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -936,7 +474,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/B"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/B"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -955,7 +493,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="C" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="C" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -965,7 +503,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/C"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/C"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -984,7 +522,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="D" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="D" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -995,7 +533,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="D_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/D" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="D_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/D" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.3333
@@ -1008,7 +546,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/D/D_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/D/D_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1027,7 +565,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/D"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/D"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1046,7 +584,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="E" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="E" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1057,7 +595,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="E_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/E" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="E_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/E" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.5
@@ -1070,7 +608,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/E/E_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/E/E_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1089,7 +627,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/E"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/E"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1108,7 +646,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="F" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="F" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1118,7 +656,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/F"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/F"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1137,7 +675,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="G" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="G" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1148,7 +686,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="G_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/G" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="G_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/G" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.3333
@@ -1161,7 +699,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/G/G_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/G/G_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1180,7 +718,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/G"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/G"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1199,7 +737,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="A1" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="A1" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1210,7 +748,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="A1_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/A1" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="A1_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/A1" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.5
@@ -1223,7 +761,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/A1/A1_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/A1/A1_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1242,7 +780,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/A1"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/A1"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1261,7 +799,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="B1" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="B1" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1272,7 +810,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="B1_FLAT" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys/B1" node_paths=PackedStringArray("pitch_output", "gate_output")]
+[node name="B1_FLAT" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys/B1" node_paths=PackedStringArray("pitch_output", "gate_output")]
 custom_minimum_size = Vector2(20, 50)
 layout_mode = 0
 offset_left = -19.3333
@@ -1285,7 +823,7 @@ pitch_output = NodePath("../../../Sockets/PitchOut/Outpt/Keyboard_Pitch_Out")
 gate_output = NodePath("../../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/B1/B1_FLAT"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/B1/B1_FLAT"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1304,7 +842,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/B1"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/B1"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1323,7 +861,7 @@ text = "!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="C1" type="ColorRect" parent="VBoxContainer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
+[node name="C1" type="ColorRect" parent="Synthesizer/Keyboard/VBoxContainer/keys" node_paths=PackedStringArray("flat", "pitch_output", "gate_output")]
 custom_minimum_size = Vector2(40, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1334,7 +872,7 @@ gate_output = NodePath("../../Sockets/Gate/Outpt/Keyboard_Gate_Out")
 key_color = Color(1, 1, 1, 1)
 pressed_color = Color(0, 0, 1, 1)
 
-[node name="Label" type="Label" parent="VBoxContainer/Keyboard/VBoxContainer/keys/C1"]
+[node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/keys/C1"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 1
 anchors_preset = 8
@@ -1355,27 +893,11 @@ vertical_alignment = 1
 
 [node name="WireHolder" type="Node" parent="." groups=["wire_holder"]]
 
-[node name="Label" type="Label" parent="WireHolder" node_paths=PackedStringArray("test_node")]
+[node name="Label" type="Label" parent="WireHolder"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "test"
 script = ExtResource("7_we1bk")
-test_node = NodePath("../../VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1")
 
-[connection signal="resized" from="VBoxContainer/Synth/Panel3" to="VBoxContainer/Synth/Panel3/Potentiometer" method="_on_panel_resized"]
-[connection signal="resized" from="VBoxContainer/Synth/Panel4" to="VBoxContainer/Synth/Panel4/Potentiometer" method="_on_panel_resized"]
-[connection signal="resized" from="VBoxContainer/Synth/Panel5" to="VBoxContainer/Synth/Panel5/Potentiometer" method="_on_panel_resized"]
-[connection signal="resized" from="VBoxContainer/Synth/Panel6" to="VBoxContainer/Synth/Panel6/Potentiometer" method="_on_panel_resized"]
-[connection signal="resized" from="VBoxContainer/Synth/Panel7" to="VBoxContainer/Synth/Panel7/Potentiometer" method="_on_panel_resized"]
-[connection signal="resized" from="VBoxContainer/Synth/Panel8" to="VBoxContainer/Synth/Panel8/Potentiometer" method="_on_panel_resized"]
-[connection signal="send_cv" from="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Freq/Input/CVIN_LFO1" to="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT/OutputSocket/LFO1" method="_on_freq_cv_in"]
-[connection signal="value_changed" from="VBoxContainer/Synth/LFO1/VBoxContainer2/Frequency/Potentiometer" to="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT/OutputSocket/LFO1" method="_on_potentiometer_frequency_value_changed"]
-[connection signal="send_cv" from="VBoxContainer/Synth/LFO1/VBoxContainer2/CVIN_Attenuator/Input/CVIN_Attenuator" to="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT/OutputSocket/LFO1" method="_on_attn_cv_in"]
-[connection signal="value_changed" from="VBoxContainer/Synth/LFO1/VBoxContainer2/Attenuator/Potentiometer" to="VBoxContainer/Synth/LFO1/VBoxContainer2/OUT/OutputSocket/LFO1" method="_on_potentiometer_attenuation_value_changed"]
-[connection signal="send_cv" from="VBoxContainer/Synth/Oscillator1/VBoxContainer2/CVIN/Input/CVIN_Osc1" to="VBoxContainer/Synth/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" method="_on_cv_in"]
-[connection signal="value_changed" from="VBoxContainer/Synth/Oscillator1/VBoxContainer2/Frequency/Potentiometer" to="VBoxContainer/Synth/Oscillator1/VBoxContainer2/OUT/OutputSocket/Osc1" method="_on_potentiometer_value_changed"]
-[connection signal="send_cv" from="VBoxContainer/Synth/Oscillator2/VBoxContainer2/CVIN/Input/CVIN_osc2" to="VBoxContainer/Synth/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" method="_on_cv_in"]
-[connection signal="value_changed" from="VBoxContainer/Synth/Oscillator2/VBoxContainer2/Frequency/Potentiometer" to="VBoxContainer/Synth/Oscillator2/VBoxContainer2/OUT/OutputSocket/Osc2" method="_on_potentiometer_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1_LVL/Potentiometer" to="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/Mixer1" method="_on_mixer_level"]
-[connection signal="value_changed" from="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2_LVL/Potentiometer" to="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" method="_on_mixer_level"]
-[connection signal="value_changed" from="VBoxContainer/Synth/OutputMixer/VBoxContainer2/MIX LVL/Potentiometer" to="VBoxContainer/Synth/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/Mixer2" method="_on_master_level"]
+[connection signal="value_changed" from="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1_LVL/Potentiometer" to="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/OutMix1" method="_on_mixer_level"]
+[connection signal="value_changed" from="Synthesizer/Panels/OutputMixer/VBoxContainer2/MIX LVL/Potentiometer" to="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/OutMix1" method="_on_master_level"]
