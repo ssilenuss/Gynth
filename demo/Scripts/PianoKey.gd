@@ -8,8 +8,8 @@ signal piano_key_gate(pitch_cv: float)
 
 
 @export var flat : Piano_Key
-@export var pitch_output: Synth_Data_CVOUT
-@export var gate_output: Synth_Data_CVOUT
+@export var pitch_output: Synth_Data
+@export var gate_output: Synth_Data
 @export var key_color : Color
 @export var pressed_color : Color
 
@@ -34,11 +34,8 @@ var notes : Dictionary = {
 	"C1" : 15.0/12.0
 }
 func _ready()->void:
+	add_to_group("piano_key")
 	color = key_color
-	if pitch_output:
-		piano_key_pitch.connect(pitch_output._on_modify_voltage)
-	if gate_output:
-		piano_key_gate.connect(gate_output._on_modify_voltage)
 	var key_input: Array=  InputMap.action_get_events(get_name())
 	label = $Label
 	if key_input.size()>0:

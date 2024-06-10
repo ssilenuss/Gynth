@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://diemc0dp2hyb8"]
 
-[ext_resource type="Script" path="res://Scripts/Socket.gd" id="1_vxcp7"]
+[ext_resource type="Script" path="res://scripts_current/Socket.gd" id="1_vxcp7"]
 [ext_resource type="Script" path="res://Scripts/debug.gd" id="2_ipkm1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_usu76"]

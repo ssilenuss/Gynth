@@ -1,14 +1,14 @@
 [gd_scene load_steps=17 format=3 uid="uid://35r8a0d5mvy5"]
 
-[ext_resource type="Script" path="res://Scripts/Potentiometer.gd" id="1_eqh77"]
-[ext_resource type="Script" path="res://Scripts/Socket.gd" id="2_a72cp"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_CVIN.gd" id="3_qes8i"]
+[ext_resource type="Script" path="res://scripts_current/Potentiometer.gd" id="1_eqh77"]
+[ext_resource type="Script" path="res://scripts_current/Socket.gd" id="2_a72cp"]
+[ext_resource type="Script" path="res://scripts_current/Synth_Data_CVIN.gd" id="3_qes8i"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_LFO.gd" id="4_ii0ys"]
 [ext_resource type="Script" path="res://Scripts/oscilloscope.gd" id="5_mex63"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_Osc.gd" id="6_s77fx"]
 [ext_resource type="Script" path="res://Scenes/Test_Mixer.gd" id="7_jh6vy"]
 [ext_resource type="Script" path="res://Scripts/Synth_Data_Mixer.gd" id="8_4evv2"]
-[ext_resource type="Script" path="res://Scripts/Synth_Data_CVOUT.gd" id="9_ojcab"]
+[ext_resource type="Script" path="res://scripts_current/Synth_Data_CVOUT.gd" id="9_ojcab"]
 [ext_resource type="Script" path="res://Scripts/PianoKey.gd" id="10_yeyq6"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="11_dic7b"]
 

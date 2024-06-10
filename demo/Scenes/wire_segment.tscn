@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://duoytfnx2pgka"]
 
-[ext_resource type="Script" path="res://Scripts/wire_segment.gd" id="1_wwcw6"]
+[ext_resource type="Script" path="res://scripts_current/wire_segment.gd" id="1_wwcw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i0j2d"]
 radius = 2.5

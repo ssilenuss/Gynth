@@ -31,7 +31,7 @@ func _ready()->void:
 			stream.mix_rate = mix_rate
 			play()
 			playback = get_stream_playback()
-			print("playback: ", playback)
+			#print("playback: ", playback)
 			#audio_osc()
 		else:
 			stop()

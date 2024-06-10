@@ -4,6 +4,13 @@ extends Label
 
 
 #func _process(delta: float) -> void:
+	#var tn :Synth_Data= test_node
+	#var v: float = tn.voltage
+	#var ap: AudioStreamPlayer = tn.audio_player
+	#var ps : float = ap.pitch_scale
+	#var f : float = ap.frequency
+	#var ef : float = ap.frequency*ps
+	#text = "v: " + str(v) + " ef:" + str(ef) + " ps:" + str(ps)
 	#var test_name = test_node.bus_idx
 	#var test_idx = AudioServer.get_bus_index(test_node.get_name())
 	#var dest_name = AudioServer.get_bus_name(test_idx)

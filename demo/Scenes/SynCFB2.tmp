@@ -1,18 +1,51 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1tgiko7seo4w"]
+[gd_scene load_steps=16 format=3 uid="uid://b1tgiko7seo4w"]
 
 [ext_resource type="Script" path="res://scripts_current/Potentiometer.gd" id="1_s2wml"]
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="1_s8tag"]
 [ext_resource type="Script" path="res://scripts_current/Socket.gd" id="2_nsrgt"]
-[ext_resource type="Script" path="res://scripts_current/LED.gd" id="3_0tiyk"]
 [ext_resource type="Script" path="res://Scripts/oscilloscope.gd" id="3_cloho"]
-[ext_resource type="Script" path="res://scripts_current/Synth_Data.gd" id="4_sa8yi"]
-[ext_resource type="Script" path="res://scripts_current/Synth_Data_VCA.gd" id="5_mpwoi"]
 [ext_resource type="Script" path="res://scripts_current/Synth_Data_Audio_Osc.gd" id="5_rds2n"]
-[ext_resource type="Script" path="res://scripts_current/Synth_Data_Envelope.gd" id="5_u0lex"]
 [ext_resource type="Script" path="res://scripts_current/Synth_Data_Audio_Mixer.gd" id="7_3o2a4"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="7_we1bk"]
 [ext_resource type="Script" path="res://scripts_current/Keyboard.gd" id="8_ccwk3"]
+[ext_resource type="Script" path="res://scripts_current/Synth_Data_OUT.gd" id="8_lbbcs"]
 [ext_resource type="Script" path="res://Scripts/PianoKey.gd" id="10_7ctkf"]
+
+[sub_resource type="GDScript" id="GDScript_j1w26"]
+script/source = "extends Synth_Data
+
+class_name Synth_Data_CVIN
+
+signal send_cv(value: float)
+var sending_cv := false
+
+func _ready()->void:
+	super()
+
+func _process(delta: float) -> void:
+	if sending_cv:
+		var send_voltage :float = 0.0
+		for w in wires:
+			send_voltage += w.voltage
+		send_cv.emit(send_voltage)
+
+	
+		
+
+func _on_wire_connected(_data: Synth_Data) -> void:
+	super(_data)
+	sending_cv = true
+
+
+func _on_all_wires_disconnected()->void:
+	print(get_name(),wires, \"no wires\")
+
+	super()
+	sending_cv = false
+	send_cv.emit(0.0)
+	
+	
+"
 
 [sub_resource type="ImageTexture" id="ImageTexture_f74mf"]
 
@@ -45,178 +78,6 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
-
-[node name="Envelope" type="ColorRect" parent="Synthesizer/Panels"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Synthesizer/Panels/Envelope"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-layout_mode = 2
-text = "Envelope Generator"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Gat" type="VBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Gat"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-audio_input_color = Color(1, 0, 1, 1)
-audio_output_color = Color(0, 0, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="Synth_Data" type="Node" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Gat/Input"]
-script = ExtResource("4_sa8yi")
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Gat"]
-layout_mode = 2
-text = "Gate"
-horizontal_alignment = 1
-
-[node name="LED" type="ColorRect" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-color = Color(1, 1, 1, 0)
-script = ExtResource("3_0tiyk")
-
-[node name="Button" type="Button" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "Loop"
-
-[node name="Attack" type="VBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Attack"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Attack"]
-layout_mode = 2
-text = "ATTACK"
-horizontal_alignment = 1
-
-[node name="Decay_Release" type="VBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Decay_Release"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Decay_Release"]
-layout_mode = 2
-text = "DECAY / RELEASE"
-horizontal_alignment = 1
-
-[node name="Sustain" type="VBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Sustain"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Sustain"]
-layout_mode = 2
-text = "SUSTAIN"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OUT" type="VBoxContainer" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OutputSocket" type="Control" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT"]
-custom_minimum_size = Vector2(47, 47)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 23.5
-hole_color = Color(0, 0.8, 1, 1)
-rest_color = Color(0, 0.8, 1, 1)
-audio = true
-
-[node name="Synth_Data_Envelope" type="Node" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket" node_paths=PackedStringArray("gate_socket")]
-script = ExtResource("5_u0lex")
-gate_socket = NodePath("../../../../HBoxContainer/Gat/Input/Synth_Data")
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT"]
-layout_mode = 2
-text = "OUT"
-horizontal_alignment = 1
-
-[node name="Oscilloscope" type="ColorRect" parent="Synthesizer/Panels/Envelope/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_cloho")
 
 [node name="VCA" type="ColorRect" parent="Synthesizer/Panels"]
 custom_minimum_size = Vector2(50, 0)
@@ -257,9 +118,8 @@ rest_color = Color(1, 0.8, 0, 1)
 audio = true
 input = true
 
-[node name="Synth_Data_CVIN0" type="Node" parent="Synthesizer/Panels/VCA/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_sa8yi")
-cv_only = false
+[node name="Synth_Data_CVIN" type="Node" parent="Synthesizer/Panels/VCA/VBoxContainer2/CVIN/Input"]
+script = SubResource("GDScript_j1w26")
 
 [node name="Label" type="Label" parent="Synthesizer/Panels/VCA/VBoxContainer2/CVIN"]
 layout_mode = 2
@@ -284,8 +144,8 @@ audio_output_color = Color(0, 0, 1, 1)
 rest_color = Color(1, 1, 0, 1)
 input = true
 
-[node name="Synth_Data_CVIN1" type="Node" parent="Synthesizer/Panels/VCA/VBoxContainer2/CVIN2/Input"]
-script = ExtResource("4_sa8yi")
+[node name="Synth_Data_CVIN" type="Node" parent="Synthesizer/Panels/VCA/VBoxContainer2/CVIN2/Input"]
+script = SubResource("GDScript_j1w26")
 
 [node name="Label" type="Label" parent="Synthesizer/Panels/VCA/VBoxContainer2/CVIN2"]
 layout_mode = 2
@@ -307,7 +167,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
-value = 0.5
+value = 0.2
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -332,9 +192,6 @@ hole_color = Color(0, 0.8, 1, 1)
 rest_color = Color(0, 0.8, 1, 1)
 audio = true
 
-[node name="Synth_Data_VCA" type="Node" parent="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("5_mpwoi")
-
 [node name="Label" type="Label" parent="Synthesizer/Panels/VCA/VBoxContainer2/OUT"]
 layout_mode = 2
 text = "OUT"
@@ -347,141 +204,13 @@ size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 script = ExtResource("3_cloho")
 
-[node name="VCA2" type="ColorRect" parent="Synthesizer/Panels"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-color = Color(0.720467, 0.720468, 0.720467, 1)
-script = ExtResource("1_s8tag")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Synthesizer/Panels/VCA2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/VCA2/VBoxContainer2"]
-layout_mode = 2
-text = "VCA"
-horizontal_alignment = 1
-
-[node name="CVIN" type="VBoxContainer" parent="Synthesizer/Panels/VCA2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 0.8, 0, 1)
-rest_color = Color(1, 0.8, 0, 1)
-audio = true
-input = true
-
-[node name="Synth_Data_CVIN0" type="Node" parent="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_sa8yi")
-cv_only = false
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN"]
-layout_mode = 2
-text = "IN"
-horizontal_alignment = 1
-
-[node name="CVIN2" type="VBoxContainer" parent="Synthesizer/Panels/VCA2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN2"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-audio_input_color = Color(1, 0, 1, 1)
-audio_output_color = Color(0, 0, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="Synth_Data_CVIN1" type="Node" parent="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN2/Input"]
-script = ExtResource("4_sa8yi")
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN2"]
-layout_mode = 2
-text = "CV IN"
-horizontal_alignment = 1
-
-[node name="Frequency" type="VBoxContainer" parent="Synthesizer/Panels/VCA2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/VCA2/VBoxContainer2/Frequency"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-value = 0.5
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/VCA2/VBoxContainer2/Frequency"]
-layout_mode = 2
-text = "OFFSET"
-horizontal_alignment = 1
-
-[node name="OUT" type="VBoxContainer" parent="Synthesizer/Panels/VCA2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OutputSocket" type="Control" parent="Synthesizer/Panels/VCA2/VBoxContainer2/OUT"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(0, 0.8, 1, 1)
-rest_color = Color(0, 0.8, 1, 1)
-audio = true
-
-[node name="Synth_Data_VCA" type="Node" parent="Synthesizer/Panels/VCA2/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("5_mpwoi")
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/VCA2/VBoxContainer2/OUT"]
-layout_mode = 2
-text = "OUT"
-horizontal_alignment = 1
-
-[node name="Oscilloscope" type="ColorRect" parent="Synthesizer/Panels/VCA2/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_cloho")
-
 [node name="Oscillator1_GD" type="ColorRect" parent="Synthesizer/Panels"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 color = Color(0.720467, 0.720468, 0.720467, 1)
+script = ExtResource("1_s8tag")
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator1_GD"]
 layout_mode = 1
@@ -517,7 +246,7 @@ rest_color = Color(1, 1, 0, 1)
 input = true
 
 [node name="Synth_Data_CVIN" type="Node" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_sa8yi")
+script = SubResource("GDScript_j1w26")
 
 [node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN"]
 layout_mode = 2
@@ -539,6 +268,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
+value = 0.2
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -572,108 +302,6 @@ text = "OUT"
 horizontal_alignment = 1
 
 [node name="Oscilloscope" type="ColorRect" parent="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-script = ExtResource("3_cloho")
-
-[node name="Oscillator2_GD2" type="ColorRect" parent="Synthesizer/Panels"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-color = Color(0.720467, 0.720468, 0.720467, 1)
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator2_GD2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2"]
-layout_mode = 2
-text = "OSC 2"
-horizontal_alignment = 1
-
-[node name="CVIN" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Input" type="Control" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/CVIN"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(1, 1, 0, 1)
-rim_color = Color(1, 1, 1, 1)
-audio_input_color = Color(1, 0, 1, 1)
-audio_output_color = Color(0, 0, 1, 1)
-rest_color = Color(1, 1, 0, 1)
-input = true
-
-[node name="Synth_Data_CVIN" type="Node" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/CVIN/Input"]
-script = ExtResource("4_sa8yi")
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/CVIN"]
-layout_mode = 2
-text = "CV IN"
-horizontal_alignment = 1
-
-[node name="Frequency" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Potentiometer" type="HSlider" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/Frequency"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_icons/grabber = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_highlight = SubResource("ImageTexture_f74mf")
-theme_override_icons/grabber_disabled = SubResource("ImageTexture_f74mf")
-theme_override_styles/slider = SubResource("StyleBoxEmpty_ilkcp")
-theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
-max_value = 1.0
-step = 0.0
-script = ExtResource("1_s2wml")
-radius = 20.0
-line_color = Color(1, 1, 1, 1)
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/Frequency"]
-layout_mode = 2
-text = "FREQ"
-horizontal_alignment = 1
-
-[node name="OUT" type="VBoxContainer" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="OutputSocket" type="Control" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/OUT"]
-custom_minimum_size = Vector2(43.02, 43.02)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-script = ExtResource("2_nsrgt")
-radius = 21.51
-hole_color = Color(0, 0.8, 1, 1)
-rest_color = Color(0, 0.8, 1, 1)
-audio = true
-
-[node name="Synth_Data_Audio_Osc" type="Node" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/OUT/OutputSocket"]
-script = ExtResource("5_rds2n")
-
-[node name="Label" type="Label" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/OUT"]
-layout_mode = 2
-text = "OUT"
-horizontal_alignment = 1
-
-[node name="Oscilloscope" type="ColorRect" parent="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
@@ -745,7 +373,6 @@ input = true
 
 [node name="OutMix1" type="Node" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1/Input_Mixer1"]
 script = ExtResource("7_3o2a4")
-cv_only = false
 
 [node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1"]
 layout_mode = 2
@@ -771,7 +398,6 @@ input = true
 
 [node name="OutMix2" type="Node" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2/Input_Mixer2"]
 script = ExtResource("7_3o2a4")
-cv_only = false
 
 [node name="Label" type="Label" parent="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2"]
 layout_mode = 2
@@ -875,7 +501,7 @@ audio_output_color = Color(0, 0, 1, 1)
 rest_color = Color(0, 1, 1, 1)
 
 [node name="Synth_Data_OUT" type="Node" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/PitchOut/Output"]
-script = ExtResource("4_sa8yi")
+script = ExtResource("8_lbbcs")
 
 [node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/PitchOut"]
 layout_mode = 2
@@ -900,7 +526,7 @@ audio_output_color = Color(0, 0, 1, 1)
 rest_color = Color(0, 1, 1, 1)
 
 [node name="Synth_Data_OUT" type="Node" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate/Output"]
-script = ExtResource("4_sa8yi")
+script = ExtResource("8_lbbcs")
 
 [node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate"]
 layout_mode = 2
@@ -1407,24 +1033,8 @@ offset_bottom = 23.0
 text = "test"
 script = ExtResource("7_we1bk")
 
-[connection signal="send_cv" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Gat/Input/Synth_Data" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_update_voltage"]
-[connection signal="resized" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/LED" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/LED" method="_on_resized"]
-[connection signal="toggled" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Button" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_loop_toggled"]
-[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Attack/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_pot_value_changed"]
-[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Decay_Release/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_pot_value_changed"]
-[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Sustain/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_pot_value_changed"]
-[connection signal="send_audio_players" from="Synthesizer/Panels/VCA/VBoxContainer2/CVIN/Input/Synth_Data_CVIN0" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_receive_audio_players"]
-[connection signal="send_cv" from="Synthesizer/Panels/VCA/VBoxContainer2/CVIN/Input/Synth_Data_CVIN0" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_input0_voltage"]
-[connection signal="send_cv" from="Synthesizer/Panels/VCA/VBoxContainer2/CVIN2/Input/Synth_Data_CVIN1" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_input1_voltage"]
-[connection signal="value_changed" from="Synthesizer/Panels/VCA/VBoxContainer2/Frequency/Potentiometer" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_pot_value_changed"]
-[connection signal="send_audio_players" from="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN/Input/Synth_Data_CVIN0" to="Synthesizer/Panels/VCA2/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_receive_audio_players"]
-[connection signal="send_cv" from="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN/Input/Synth_Data_CVIN0" to="Synthesizer/Panels/VCA2/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_input0_voltage"]
-[connection signal="send_cv" from="Synthesizer/Panels/VCA2/VBoxContainer2/CVIN2/Input/Synth_Data_CVIN1" to="Synthesizer/Panels/VCA2/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_input1_voltage"]
-[connection signal="value_changed" from="Synthesizer/Panels/VCA2/VBoxContainer2/Frequency/Potentiometer" to="Synthesizer/Panels/VCA2/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_pot_value_changed"]
-[connection signal="send_cv" from="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN/Input/Synth_Data_CVIN" to="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/OUT/OutputSocket/Synth_Data_Audio_Osc" method="_on_update_voltage"]
+[connection signal="send_cv" from="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/CVIN/Input/Synth_Data_CVIN" to="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/OUT/OutputSocket/Synth_Data_Audio_Osc" method="_on_cv_in"]
 [connection signal="value_changed" from="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/Frequency/Potentiometer" to="Synthesizer/Panels/Oscillator1_GD/VBoxContainer2/OUT/OutputSocket/Synth_Data_Audio_Osc" method="_on_pot_value_changed"]
-[connection signal="send_cv" from="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/CVIN/Input/Synth_Data_CVIN" to="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/OUT/OutputSocket/Synth_Data_Audio_Osc" method="_on_update_voltage"]
-[connection signal="value_changed" from="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/Frequency/Potentiometer" to="Synthesizer/Panels/Oscillator2_GD2/VBoxContainer2/OUT/OutputSocket/Synth_Data_Audio_Osc" method="_on_pot_value_changed"]
 [connection signal="value_changed" from="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1_LVL/Potentiometer" to="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/OutMix1" method="_on_mixer_level"]
 [connection signal="value_changed" from="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2_LVL/Potentiometer" to="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN2/Input_Mixer2/OutMix2" method="_on_mixer_level"]
 [connection signal="value_changed" from="Synthesizer/Panels/OutputMixer/VBoxContainer2/MIX LVL/Potentiometer" to="Synthesizer/Panels/OutputMixer/VBoxContainer2/IN1/Input_Mixer1/OutMix1" method="_on_master_level"]

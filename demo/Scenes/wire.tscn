@@ -1,12 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://ck7d7bmdy3mjj"]
 
-[ext_resource type="Script" path="res://Scripts/Wire.gd" id="1_ilx5w"]
+[ext_resource type="Script" path="res://scripts_current/Wire.gd" id="1_ilx5w"]
 [ext_resource type="PackedScene" uid="uid://duoytfnx2pgka" path="res://Scenes/wire_segment.tscn" id="2_03syp"]
 [ext_resource type="PackedScene" uid="uid://dgj7dgak3k7mp" path="res://Scenes/wire_end.tscn" id="2_rn4q7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pi115"]
 rough = true
-bounce = 1.0
 absorbent = true
 
 [node name="Wire" type="Node2D"]
@@ -20,7 +19,8 @@ collision_layer = 4
 rotation = 1.5708
 node_a = NodePath("../WireEnd0")
 node_b = NodePath("../WireSegment")
-softness = 1.0
+softness = 0.01
+angular_limit_enabled = true
 angular_limit_lower = -1.05243
 angular_limit_upper = 0.893609
 
@@ -28,10 +28,11 @@ angular_limit_upper = 0.893609
 position = Vector2(5, 0)
 rotation = 1.5708
 collision_layer = 2
-mass = 0.1
+mass = 0.01
 physics_material_override = SubResource("PhysicsMaterial_pi115")
 gravity_scale = 0.5
 inertia = 1000.0
+linear_damp = 100.0
 angular_damp = 1000.0
 size = Vector2(6, 10)
 

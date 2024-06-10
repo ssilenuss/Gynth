@@ -29,6 +29,7 @@ func _ready() -> void:
 
 	add_child(end1)
 	final_pinjoint.set_node_b(end1.get_path())
+	end1.global_transform.origin = end0.global_transform.origin
 	end1.held = true
 	Singleton.held_wire = end1
 
@@ -82,13 +83,34 @@ func _on_mouse_off_wire() -> void:
 			ws.color = ws.rest_color
 			ws.update_color()
 
+func disconnect_data()->void:
+	var data0: Synth_Data = end0.socket.data
+	var data1: Synth_Data = end1.socket.data
+	
+	var idx0: int = data0.wires.find(data1)
+	var idx1: int = data1.wires.find(data0)
+	
+	data0.wires.remove_at(idx0)
+	data1.wires.remove_at(idx1)
+	
+	data0.wire_disconnected.emit(data1)
+	data1.wire_disconnected.emit(data0)
 	
 func connect_data()->void:
 	if end1.socket.data:
-		end0.socket.data.connected_to = end1.socket.data
+		if end0.socket.data.wires.find(end1.socket.data)==-1:
+			end0.socket.data.wires.append(end1.socket.data)
+			end0.socket.data.wire_connected.emit(end1.socket.data)
 
 	if end0.socket.data:
-		end1.socket.data.connected_to = end0.socket.data
+		if end1.socket.data.wires.find(end0.socket.data)==-1:
+			end1.socket.data.wires.append(end0.socket.data)
+			end1.socket.data.wire_connected.emit(end0.socket.data)
+	#if end1.socket.data:
+		#end0.socket.data.connected_to = end1.socket.data
+#
+	#if end0.socket.data:
+		#end1.socket.data.connected_to = end0.socket.data
 		#d_connected = true
 
 

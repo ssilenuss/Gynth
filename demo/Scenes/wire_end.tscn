@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgj7dgak3k7mp"]
 
-[ext_resource type="Script" path="res://Scripts/WireEnd.gd" id="1_hpxyk"]
+[ext_resource type="Script" path="res://scripts_current/WireEnd.gd" id="1_gadi4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_shcqo"]
 
@@ -8,7 +8,7 @@
 gravity_scale = 0.0
 freeze = true
 freeze_mode = 1
-script = ExtResource("1_hpxyk")
+script = ExtResource("1_gadi4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_shcqo")

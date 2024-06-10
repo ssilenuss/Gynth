@@ -5,6 +5,7 @@ class_name WireEnd
 var input := true
 var socket : Socket = null
 var wire : Wire
+var can_delete:=false
 
 var color : Color = Color(1,0,0,1)
 
@@ -23,7 +24,7 @@ func _ready():
 func _physics_process(delta):
 	if held:
 		global_transform.origin = get_global_mouse_position()
-		if Input.is_action_just_pressed("right_mouse_button") and held:
+		if Input.is_action_just_pressed("right_mouse_button") and held and can_delete:
 			Singleton.held_wire = null
 			socket = null
 			wire.delete_wire()

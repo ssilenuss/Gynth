@@ -23,7 +23,7 @@ driver/enable_input=true
 
 [autoload]
 
-Singleton="*res://Scripts/Singleton.gd"
+Singleton="*res://scripts_current/Singleton.gd"
 
 [display]
 
