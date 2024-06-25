@@ -70,4 +70,3 @@ func fill_buffer():
 				else:
 					playback.push_frame(Vector2.ZERO)
 				to_fill -= 1
-

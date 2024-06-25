@@ -97,4 +97,3 @@ func _on_pickup_jack(_socket: Socket, _jack: WireEnd) -> void:
 	_jack.held = true
 	_socket.jack = null
 	_jack.socket = null
-

@@ -12,21 +12,22 @@ func _on_pot_value_changed(value: float)->void:
 	#voltage = pot_value + input1_voltage+input0_voltage
 	
 func _on_input0_voltage(value: float)->void:
-	input0_voltage = 1.0
+	input0_voltage = value
 	mod_output()
 	#voltage = pot_value + input1_voltage+input0_voltage
 
 func _on_input1_voltage(value: float)->void:
-	input0_voltage = value
+	input1_voltage = value
 	mod_output()
 	#voltage = pot_value + input1_voltage+input0_voltage
 
 func _on_receive_audio_players(value: Array)->void:
 	audio_players = value
-	#print(get_name(), audio_players)
+	print(get_name(), audio_players)
 
 func mod_output()->void:
-	voltage = (input0_voltage + input1_voltage) * pot_value
+	voltage = input1_voltage * pot_value
 	for ap in audio_players:
-		(ap as AudioStreamPlayer).set_volume_db(lerpf(-80, 0.0, voltage))
+		var lvl :float =lerpf(-80, 0.0, voltage)
+		(ap as AudioStreamPlayer).set_volume_db(lvl)
 	pass

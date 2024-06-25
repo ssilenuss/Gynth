@@ -51,4 +51,3 @@ func _draw():
 		var pos2 := pos1*1.5
 		draw_line(pos1+center, pos2+center, line_color, 1.0)
 		
-

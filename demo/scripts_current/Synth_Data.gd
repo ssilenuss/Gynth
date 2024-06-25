@@ -33,6 +33,7 @@ func _process(delta: float) -> void:
 		var send_voltage :float = 0.0
 		for w in wires:
 			send_voltage += w.voltage
+			
 		send_cv.emit(send_voltage)
 		#print(get_name(), send_voltage)
 	
@@ -77,4 +78,3 @@ func _on_update_voltage(value: float)->void:
 			voltage = 1.0
 	else:
 		voltage = value
-

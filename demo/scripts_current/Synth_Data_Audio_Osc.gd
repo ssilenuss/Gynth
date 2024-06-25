@@ -8,7 +8,7 @@ var input_voltage : float
 func _ready()->void:
 	
 	#audio_player = audio_osc
-	audio_osc = Audio_Oscillator_GD.new()
+	#audio_osc = Audio_Oscillator_GD.new()
 	input_voltage = 0.0
 	audio_players.append(audio_osc)
 	add_child(audio_osc)
@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	super(delta)
 	if audio_osc.generating:
 		voltage = audio_osc.value
-		print(voltage)
+		
 
 
 func _on_wire_connected(_data: Synth_Data) -> void:
@@ -51,4 +51,3 @@ func mod_frequency()->void:
 	var p = pow(2, ((10*freq_pot_value)+input_voltage))
 	#print(input_voltage,", ", voltage)
 	audio_osc.set_pitch_scale(p)
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1tgiko7seo4w"]
+[gd_scene load_steps=20 format=3 uid="uid://b1tgiko7seo4w"]
 
 [ext_resource type="Script" path="res://scripts_current/Potentiometer.gd" id="1_s2wml"]
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="1_s8tag"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://scripts_current/Synth_Data_Audio_Osc.gd" id="5_rds2n"]
 [ext_resource type="Script" path="res://scripts_current/Synth_Data_Envelope.gd" id="5_u0lex"]
 [ext_resource type="Script" path="res://scripts_current/Synth_Data_Audio_Mixer.gd" id="7_3o2a4"]
+[ext_resource type="Script" path="res://Scripts/envelope_vis.gd" id="7_kqryu"]
 [ext_resource type="Script" path="res://Scripts/Test.gd" id="7_we1bk"]
 [ext_resource type="Script" path="res://scripts_current/Keyboard.gd" id="8_ccwk3"]
+[ext_resource type="Script" path="res://scripts_current/playhead_visualiser.gd" id="8_y5s10"]
 [ext_resource type="Script" path="res://Scripts/PianoKey.gd" id="10_7ctkf"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_f74mf"]
@@ -126,6 +128,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
+value = 0.1
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -150,6 +153,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
+value = 0.2
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -174,6 +178,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
+value = 0.5
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -215,8 +220,28 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0.286275, 1)
 script = ExtResource("3_cloho")
+
+[node name="Envelope_Visualizer" type="ColorRect" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("7_kqryu")
+
+[node name="Playhead_Visualiser" type="ColorRect" parent="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("8_y5s10")
 
 [node name="VCA" type="ColorRect" parent="Synthesizer/Panels"]
 custom_minimum_size = Vector2(50, 0)
@@ -307,7 +332,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
-value = 0.5
+value = 1.0
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -344,7 +369,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
+color = Color(0.270588, 0, 0, 1)
 script = ExtResource("3_cloho")
 
 [node name="VCA2" type="ColorRect" parent="Synthesizer/Panels"]
@@ -436,7 +461,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
-value = 0.5
+value = 1.0
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -539,6 +564,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
+value = 0.2
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -641,6 +667,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_48lvc")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_dujjb")
 max_value = 1.0
 step = 0.0
+value = 0.5
 script = ExtResource("1_s2wml")
 radius = 20.0
 line_color = Color(1, 1, 1, 1)
@@ -901,6 +928,7 @@ rest_color = Color(0, 1, 1, 1)
 
 [node name="Synth_Data_OUT" type="Node" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate/Output"]
 script = ExtResource("4_sa8yi")
+gate = true
 
 [node name="Label" type="Label" parent="Synthesizer/Keyboard/VBoxContainer/Sockets/Gate"]
 layout_mode = 2
@@ -1410,9 +1438,14 @@ script = ExtResource("7_we1bk")
 [connection signal="send_cv" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Gat/Input/Synth_Data" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_update_voltage"]
 [connection signal="resized" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/LED" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/LED" method="_on_resized"]
 [connection signal="toggled" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer/Button" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_loop_toggled"]
-[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Attack/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_pot_value_changed"]
-[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Decay_Release/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_pot_value_changed"]
-[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Sustain/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_pot_value_changed"]
+[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Attack/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_attack_changed"]
+[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Attack/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer" method="_on_attack_changed"]
+[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Decay_Release/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_decay_release_value_changed"]
+[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Decay_Release/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer" method="_on_decay_release_changed"]
+[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Sustain/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" method="_on_sustain_value_changed"]
+[connection signal="value_changed" from="Synthesizer/Panels/Envelope/VBoxContainer2/Sustain/Potentiometer" to="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer" method="_on_sustain_changed"]
+[connection signal="send_cv" from="Synthesizer/Panels/Envelope/VBoxContainer2/HBoxContainer2/OUT/OutputSocket/Synth_Data_Envelope" to="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer/Playhead_Visualiser" method="_on_synth_data_envelope_send_cv"]
+[connection signal="resized" from="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer" to="Synthesizer/Panels/Envelope/VBoxContainer2/Oscilloscope/Envelope_Visualizer" method="_on_resized"]
 [connection signal="send_audio_players" from="Synthesizer/Panels/VCA/VBoxContainer2/CVIN/Input/Synth_Data_CVIN0" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_receive_audio_players"]
 [connection signal="send_cv" from="Synthesizer/Panels/VCA/VBoxContainer2/CVIN/Input/Synth_Data_CVIN0" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_input0_voltage"]
 [connection signal="send_cv" from="Synthesizer/Panels/VCA/VBoxContainer2/CVIN2/Input/Synth_Data_CVIN1" to="Synthesizer/Panels/VCA/VBoxContainer2/OUT/OutputSocket/Synth_Data_VCA" method="_on_input1_voltage"]

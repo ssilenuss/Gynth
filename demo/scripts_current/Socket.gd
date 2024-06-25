@@ -265,4 +265,3 @@ func _on_create_wire(_socket: Socket) -> void:
 			w.end0.color=_socket.cv_output_color
 			w.end1.color=_socket.cv_input_color
 	
-

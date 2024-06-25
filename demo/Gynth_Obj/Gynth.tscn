@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://chkdx8ahk6ydn"]
+
+[ext_resource type="Script" path="res://Gynth_Obj/gynth_3d.gd" id="1_v38wy"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_7hy5i"]
+mix_rate = 48000.0
+
+[sub_resource type="Curve" id="Curve_h06bi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10274, 0.0667), 0.0, 0.0, 0, 0, Vector2(0.10274, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_lsxet"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.345029, 0.549451), 0.0, 0.0, 0, 0, Vector2(0.847953, 0.758242), 0.0, 0.0, 0, 0, Vector2(0.964912, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qo26o"]
+curve = SubResource("Curve_lsxet")
+
+[node name="Gynth" type="Node3D"]
+
+[node name="Gynth3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamGenerator_7hy5i")
+volume_db = -23.5616
+pitch_scale = 4.298
+bus = &"Gynth4"
+script = ExtResource("1_v38wy")
+pitch = 3.298
+generating = true
+speed = 0.1
+envelope = SubResource("Curve_h06bi")
+attack = 0.105
+decay = 0.0
+sustain = 0.667
+release = 0.917
+
+[node name="TextureButton" type="TextureButton" parent="Gynth3D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = SubResource("CurveTexture_qo26o")

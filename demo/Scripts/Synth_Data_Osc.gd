@@ -99,4 +99,3 @@ func _on_cv_in(value: float) -> void:
 func _on_potentiometer_value_changed(value: float) -> void:
 	pot_val = value
 	modify_frequency(0.0)
-
