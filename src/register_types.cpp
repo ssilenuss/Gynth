@@ -1,7 +1,7 @@
 #include "register_types.h"
 
-#include "audio_stream_oscillator.h"
-#include "osc.h"
+#include "audio_stream_oscillator3D.h"
+//#include "osc.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -14,8 +14,8 @@ void initialize_gynth_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	ClassDB::register_class<AudioStreamOscillator>();
-	ClassDB::register_class<Osc>();
+	ClassDB::register_class<AudioStreamOscillator3D>();
+	//ClassDB::register_class<Osc>();
 }
 
 void uninitialize_gynth_module(ModuleInitializationLevel p_level) {
@@ -26,7 +26,7 @@ void uninitialize_gynth_module(ModuleInitializationLevel p_level) {
 
 extern "C" {
 // Initialization.
-GDExtensionBool GDE_EXPORT gynth_library_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization) {
+	GDExtensionBool GDE_EXPORT gynth_library_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization) {
 	godot::GDExtensionBinding::InitObject init_obj(p_get_proc_address, p_library, r_initialization);
 
 	init_obj.register_initializer(initialize_gynth_module);

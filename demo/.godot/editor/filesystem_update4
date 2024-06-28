@@ -1,5 +1,8 @@
-res://screentest.gdshader
-res://Gynth_Obj/Gynth.tscn
-res://Gynth_Obj/gynth_3d.gd
-res://Scripts/Synth_Data_Osc.gd
 res://default_bus_layout.tres
+res://Extension.tscn
+res://Gynth_Extension/Stress_Extension.tscn
+res://Gynth_Extension/ExtensionStress.gd
+res://Gynth_Extension/rotating_cube.gd
+res://rotating_cube.tscn
+res://Gynth_Extension/Stress_GDScript.tscn
+res://Gynth_Extension/GDStress.gd

@@ -1,0 +1,279 @@
+[gd_scene load_steps=3 format=3 uid="uid://1vr8g2dxrg65"]
+
+[ext_resource type="Script" path="res://Gynth_Obj/Scripts/wav_vis.gd" id="1_pqsbc"]
+
+[sub_resource type="GDScript" id="GDScript_qt0p6"]
+script/source = "extends Control
+
+
+@onready var bang_box : CheckBox = $VBoxContainer/EnvelopeOptions/CheckBox_Bang
+@onready var gen_box : CheckBox = $VBoxContainer/HFO/CheckBox_Generating
+@onready var enable_envelope_box : CheckBox = $VBoxContainer/EnvelopeOptions/CheckBox_EnvelopeEnable
+@onready var loop_envelope_box : CheckBox = $VBoxContainer/EnvelopeOptions/CheckBox_LoopEnvelope
+@onready var wav_menu : MenuButton = $VBoxContainer/HFO/WaveType_Menu
+@onready var wav_vis : ColorRect = $VBoxContainer/wav_vis
+@onready var pitchlabel : Label = $VBoxContainer/PitchLabel
+@onready var pitchslider : HSlider = $VBoxContainer/PitchSlider
+@onready var attenuation_slider : HSlider = $VBoxContainer/AttenuationSlider
+@onready var attack_slider : HSlider = $VBoxContainer/AttackSlider
+@onready var decay_slider : HSlider = $VBoxContainer/DecaySlider
+@onready var sustain_slider: HSlider = $VBoxContainer/SustainSlider
+@onready var release_slider : HSlider = $VBoxContainer/ReleaseSlider
+@onready var speed_slider : HSlider = $VBoxContainer/SpeedSlider
+
+@export var playhead_color: Color = Color(0,0,1,1)
+var playhead_position : float = 0.0
+
+@export var env_color : Color
+
+var gynth : Gynth_3D_GD
+
+func _ready() -> void:
+	wav_menu.get_popup().id_pressed.connect(wavetype_selected)
+
+func _on_check_box_generating_toggled(toggled_on: bool) -> void:
+	gynth.set_generating(toggled_on)
+
+
+func _on_check_box_bang_button_down() -> void:
+	gynth.receive_bang(true)
+	await get_tree().create_timer(.1).timeout
+	bang_box.button_pressed = false
+	
+func init_menu()->void:
+	gen_box.button_pressed = gynth.generating
+	enable_envelope_box.button_pressed = gynth.env_enabled
+	loop_envelope_box.button_pressed = gynth.loop
+	wav_menu.text = wav_menu.get_popup().get_item_text(gynth.osc_type)
+	wav_vis.gynth = gynth
+	pitchslider.value = gynth.pitch
+	_on_pitch_slider_value_changed(gynth.pitch)
+	attenuation_slider.value = gynth.attenuation
+	attack_slider.value = gynth.attack
+	decay_slider.value = gynth.decay
+	sustain_slider.value = gynth.sustain
+	release_slider.value = gynth.release
+	speed_slider.value = gynth.speed
+	
+
+func _on_check_box_envelope_enable_toggled(toggled_on: bool) -> void:
+	gynth.set_env_enabled(toggled_on)
+
+
+func _on_check_box_loop_envelope_toggled(toggled_on: bool) -> void:
+	gynth.loop = toggled_on
+
+
+func wavetype_selected(idx: int)->void:
+	wav_menu.text = wav_menu.get_popup().get_item_text(idx)
+	gynth.set_generating(false)
+	gynth.osc_type = idx
+	gynth.set_generating(true)
+	
+
+
+func _on_pitch_slider_value_changed(value: float) -> void:
+	gynth.pitch = value
+	pitchlabel.text = \"Pitch: \" + str(gynth.frequency*gynth.pitch_scale)
+
+
+func _on_attenuation_slider_value_changed(value: float) -> void:
+	gynth.attenuation = value
+
+
+func _on_attack_slider_value_changed(value: float) -> void:
+	gynth.attack = value
+
+func _on_decay_slider_value_changed(value: float) -> void:
+	gynth.decay = value
+
+
+func _on_sustain_slider_value_changed(value: float) -> void:
+	gynth.sustain = value
+
+
+func _on_release_slider_value_changed(value: float) -> void:
+	gynth.release = value
+
+
+func _on_speed_slider_value_changed(value: float) -> void:
+	gynth.speed = value
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_qt0p6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "HFO"
+horizontal_alignment = 1
+
+[node name="HFO" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox_Generating" type="CheckBox" parent="VBoxContainer/HFO"]
+layout_mode = 2
+text = "Generating"
+
+[node name="WaveType_Menu" type="MenuButton" parent="VBoxContainer/HFO"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "WaveType
+"
+item_count = 4
+popup/item_0/text = "SIN"
+popup/item_1/text = "SAW"
+popup/item_1/id = 1
+popup/item_2/text = "PULSE"
+popup/item_2/id = 2
+popup/item_3/text = "SQUARE"
+popup/item_3/id = 3
+
+[node name="PitchLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pitch: "
+horizontal_alignment = 1
+
+[node name="PitchSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="AttenuationLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Attenuation"
+horizontal_alignment = 1
+
+[node name="AttenuationSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EnvelopeLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "ENVELOPE"
+horizontal_alignment = 1
+
+[node name="EnvelopeOptions" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox_Bang" type="CheckBox" parent="VBoxContainer/EnvelopeOptions"]
+layout_mode = 2
+text = "Bang"
+
+[node name="CheckBox_EnvelopeEnable" type="CheckBox" parent="VBoxContainer/EnvelopeOptions"]
+layout_mode = 2
+text = "Enable"
+
+[node name="CheckBox_LoopEnvelope" type="CheckBox" parent="VBoxContainer/EnvelopeOptions"]
+layout_mode = 2
+text = "Loop"
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Speed"
+horizontal_alignment = 1
+
+[node name="SpeedSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="AttackLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+horizontal_alignment = 1
+
+[node name="AttackSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="DecayLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Decay
+"
+horizontal_alignment = 1
+
+[node name="DecaySlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="SustainLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sustain"
+horizontal_alignment = 1
+
+[node name="SustainSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="ReleaseLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Release"
+horizontal_alignment = 1
+
+[node name="ReleaseSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 10.0
+step = 0.001
+
+[node name="wav_vis" type="ColorRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0.243137)
+script = ExtResource("1_pqsbc")
+
+[node name="Label" type="Label" parent="VBoxContainer/wav_vis"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="toggled" from="VBoxContainer/HFO/CheckBox_Generating" to="." method="_on_check_box_generating_toggled"]
+[connection signal="toggled" from="VBoxContainer/HFO/WaveType_Menu" to="." method="_on_wave_type_menu_toggled"]
+[connection signal="value_changed" from="VBoxContainer/PitchSlider" to="." method="_on_pitch_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AttenuationSlider" to="." method="_on_attenuation_slider_value_changed"]
+[connection signal="button_down" from="VBoxContainer/EnvelopeOptions/CheckBox_Bang" to="." method="_on_check_box_bang_button_down"]
+[connection signal="toggled" from="VBoxContainer/EnvelopeOptions/CheckBox_Bang" to="." method="_on_check_box_bang_toggled"]
+[connection signal="toggled" from="VBoxContainer/EnvelopeOptions/CheckBox_EnvelopeEnable" to="." method="_on_check_box_envelope_enable_toggled"]
+[connection signal="toggled" from="VBoxContainer/EnvelopeOptions/CheckBox_LoopEnvelope" to="." method="_on_check_box_loop_envelope_toggled"]
+[connection signal="value_changed" from="VBoxContainer/SpeedSlider" to="." method="_on_speed_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/AttackSlider" to="." method="_on_attack_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/DecaySlider" to="." method="_on_decay_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SustainSlider" to="." method="_on_sustain_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ReleaseSlider" to="." method="_on_release_slider_value_changed"]
+[connection signal="resized" from="VBoxContainer/wav_vis" to="VBoxContainer/wav_vis" method="_on_resized"]

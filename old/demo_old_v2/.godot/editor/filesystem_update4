@@ -1,0 +1,6 @@
+res://default_bus_layout.tres
+res://Gynth_Obj/Scenes/control.tscn
+res://screentest.gdshader
+res://Scripts/PianoKey.gd
+res://Gynth_Obj/Gynth.tscn
+res://Gynth_Obj/Scripts/gynth_3d.gd

@@ -1,0 +1,135 @@
+[gd_scene load_steps=2 format=3 uid="uid://1vr8g2dxrg65"]
+
+[sub_resource type="GDScript" id="GDScript_qt0p6"]
+script/source = "extends Control
+
+
+@onready var bang_box : CheckBox = $VBoxContainer/EnvelopeOptions/CheckBox_Bang
+@onready var gen_box : CheckBox = $VBoxContainer/HFO/CheckBox_Generating
+@onready var enable_envelope_box : CheckBox = $VBoxContainer/EnvelopeOptions/CheckBox_EnvelopeEnable
+@onready var loop_envelope_box : CheckBox = $VBoxContainer/EnvelopeOptions/CheckBox_LoopEnvelope
+@onready var wav_menu : MenuButton = $VBoxContainer/HFO/WaveType_Menu
+
+var gynth : Gynth_3D_GD
+
+
+func _on_check_box_generating_toggled(toggled_on: bool) -> void:
+	gynth.set_generating(toggled_on)
+
+
+func _on_check_box_bang_button_down() -> void:
+	gynth.receive_bang(true)
+	await get_tree().create_timer(.1).timeout
+	bang_box.button_pressed = false
+	
+func init_menu()->void:
+	gen_box.button_pressed = gynth.generating
+	enable_envelope_box.button_pressed = gynth.env_enabled
+	loop_envelope_box.button_pressed = gynth.loop
+
+
+
+
+
+func _on_check_box_envelope_enable_toggled(toggled_on: bool) -> void:
+	gynth.set_env_enabled(toggled_on)
+
+
+func _on_check_box_loop_envelope_toggled(toggled_on: bool) -> void:
+	gynth.loop = toggled_on
+
+
+
+
+
+func _on_wave_type_menu_toggled(toggled_on: bool) -> void:
+	#wav_menu.text = wav_menu.get_popup().get_item_text()
+	pass"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_qt0p6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "HFO"
+horizontal_alignment = 1
+
+[node name="HFO" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox_Generating" type="CheckBox" parent="VBoxContainer/HFO"]
+layout_mode = 2
+text = "Generating"
+
+[node name="WaveType_Menu" type="MenuButton" parent="VBoxContainer/HFO"]
+layout_mode = 2
+text = "WaveType
+"
+item_count = 2
+popup/item_0/text = "test1"
+popup/item_1/text = "test2"
+popup/item_1/id = 1
+
+[node name="PopupMenu" type="PopupMenu" parent="VBoxContainer/HFO"]
+item_count = 2
+item_0/text = "test1"
+item_1/text = "test2"
+item_1/id = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "ENVELOPE"
+horizontal_alignment = 1
+
+[node name="EnvelopeOptions" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox_Bang" type="CheckBox" parent="VBoxContainer/EnvelopeOptions"]
+layout_mode = 2
+text = "Bang"
+
+[node name="CheckBox_EnvelopeEnable" type="CheckBox" parent="VBoxContainer/EnvelopeOptions"]
+layout_mode = 2
+text = "Enable"
+
+[node name="CheckBox_LoopEnvelope" type="CheckBox" parent="VBoxContainer/EnvelopeOptions"]
+layout_mode = 2
+text = "Loop"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="toggled" from="VBoxContainer/HFO/CheckBox_Generating" to="." method="_on_check_box_generating_toggled"]
+[connection signal="toggled" from="VBoxContainer/HFO/WaveType_Menu" to="." method="_on_wave_type_menu_toggled"]
+[connection signal="button_down" from="VBoxContainer/EnvelopeOptions/CheckBox_Bang" to="." method="_on_check_box_bang_button_down"]
+[connection signal="toggled" from="VBoxContainer/EnvelopeOptions/CheckBox_Bang" to="." method="_on_check_box_bang_toggled"]
+[connection signal="toggled" from="VBoxContainer/EnvelopeOptions/CheckBox_EnvelopeEnable" to="." method="_on_check_box_envelope_enable_toggled"]
+[connection signal="toggled" from="VBoxContainer/EnvelopeOptions/CheckBox_LoopEnvelope" to="." method="_on_check_box_loop_envelope_toggled"]
