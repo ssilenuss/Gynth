@@ -1,7 +1,7 @@
 #include "register_types.h"
 
-#include "audio_stream_oscillator3D.h"
-//#include "osc.h"
+//#include "audio_stream_oscillator3D.h"
+#include "osc.h"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
@@ -14,8 +14,8 @@ void initialize_gynth_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	ClassDB::register_class<AudioStreamOscillator3D>();
-	//ClassDB::register_class<Osc>();
+	//ClassDB::register_class<AudioStreamOscillator3D>();
+	ClassDB::register_class<Osc>();
 }
 
 void uninitialize_gynth_module(ModuleInitializationLevel p_level) {

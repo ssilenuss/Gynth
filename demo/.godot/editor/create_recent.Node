@@ -1,4 +1,11 @@
+Timer
+Fifth_Scalor
+Control
+MarginContainer
+CheckBox
+GridContainer
+AudioStreamPlayer2D
+Node2D
 MeshInstance3D
 CollisionShape3D
-AudioStreamOscillator3D
 Gynth_3D
