@@ -2,21 +2,21 @@ extends Control
 class_name Gynth_Controller
 var gynth : AudioOsc2D
 
-@onready var controls_visible_box : CheckBox = $Controls/VBoxContainer/HFO/CheckBox_Controls_Visible
-@onready var bang_box : CheckBox = $Controls/VBoxContainer/EnvelopeOptions/CheckBox_Bang
-@onready var gen_box : CheckBox = $Controls/VBoxContainer/HFO/CheckBox_Generating
-@onready var enable_envelope_box : CheckBox = $Controls/VBoxContainer/EnvelopeOptions/CheckBox_EnvelopeEnable
-@onready var loop_envelope_box : CheckBox = $Controls/VBoxContainer/EnvelopeOptions/CheckBox_LoopEnvelope
-@onready var wav_menu : MenuButton = $Controls/VBoxContainer/HFO/WaveType_Menu
-@onready var wav_vis : ColorRect = $wav_vis
-@onready var pitchlabel : Label = $Controls/VBoxContainer/PitchLabel
-@onready var pitchslider : HSlider = $Controls/VBoxContainer/PitchSlider
-@onready var limiter_slider : HSlider = $Controls/VBoxContainer/LimiterSlider
-@onready var attack_slider : HSlider = $Controls/VBoxContainer/AttackSlider
-@onready var decay_slider : HSlider = $Controls/VBoxContainer/DecaySlider
-@onready var sustain_slider: HSlider = $Controls/VBoxContainer/SustainSlider
-@onready var release_slider : HSlider = $Controls/VBoxContainer/ReleaseSlider
-@onready var speed_slider : HSlider = $Controls/VBoxContainer/SpeedSlider
+@onready var controls_visible_box : CheckBox = $VBoxContainer/Controls/VBoxContainer/HFO/CheckBox_Controls_Visible
+@onready var bang_box : CheckBox = $VBoxContainer/Controls/VBoxContainer/EnvelopeOptions/CheckBox_Bang
+@onready var gen_box : CheckBox = $VBoxContainer/Controls/VBoxContainer/HFO/CheckBox_Generating
+@onready var enable_envelope_box : CheckBox = $VBoxContainer/Controls/VBoxContainer/EnvelopeOptions/CheckBox_EnvelopeEnable
+@onready var loop_envelope_box : CheckBox = $VBoxContainer/Controls/VBoxContainer/EnvelopeOptions/CheckBox_LoopEnvelope
+@onready var wav_menu : MenuButton = $VBoxContainer/Controls/VBoxContainer/HFO/WaveType_Menu
+@onready var wav_vis : ColorRect = $VBoxContainer/wav_vis
+@onready var pitchlabel : Label = $VBoxContainer/Controls/VBoxContainer/PitchLabel
+@onready var pitchslider : HSlider = $VBoxContainer/Controls/VBoxContainer/PitchSlider
+@onready var limiter_slider : HSlider = $VBoxContainer/Controls/VBoxContainer/LimiterSlider
+@onready var attack_slider : HSlider = $VBoxContainer/Controls/VBoxContainer/AttackSlider
+@onready var decay_slider : HSlider = $VBoxContainer/Controls/VBoxContainer/DecaySlider
+@onready var sustain_slider: HSlider = $VBoxContainer/Controls/VBoxContainer/SustainSlider
+@onready var release_slider : HSlider = $VBoxContainer/Controls/VBoxContainer/ReleaseSlider
+@onready var speed_slider : HSlider = $VBoxContainer/Controls/VBoxContainer/SpeedSlider
 
 
 @export var playhead_color: Color = Color(0,0,1,1)
