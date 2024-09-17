@@ -25,7 +25,7 @@ var playhead_position : float = 0.0
 @export var env_color : Color
 
 func _ready() -> void:
-	wav_menu.get_popup().id_pressed.connect(wavetype_selected)
+	#wav_menu.get_popup().id_pressed.connect(wavetype_selected)
 	gynth = $AudioOsc2D
 	wav_vis.gynth = gynth
 	

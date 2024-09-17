@@ -40,6 +40,7 @@ namespace godot {
 		PackedVector2Array get_saw_buffer(int _size);
 		PackedVector2Array get_pulse_buffer(int _size);
 		PackedVector2Array get_square_buffer(int _size);
+		PackedVector2Array get_noise_buffer(int _size);
 
 	};
 

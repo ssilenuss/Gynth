@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://1vr8g2dxrg65"]
+[gd_scene load_steps=6 format=3 uid="uid://1vr8g2dxrg65"]
 
 [ext_resource type="Script" path="res://Scripts/gynth_console_2D.gd" id="1_p0bg2"]
 [ext_resource type="Script" path="res://Scripts/wav_vis_2D.gd" id="1_pqsbc"]
 [ext_resource type="Script" path="res://Scripts/audio_osc_2D.gd" id="3_o8jjk"]
 
-[sub_resource type="Curve" id="Curve_gic6r"]
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_gy5ml"]
+mix_rate = 48000.0
+
+[sub_resource type="Curve" id="Curve_eqp5x"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.571429, 1), 0.0, 0.0, 0, 0, Vector2(0.857143, 0.05), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
@@ -60,7 +63,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "WaveType
 "
-item_count = 4
+item_count = 5
 popup/item_0/text = "SIN"
 popup/item_1/text = "SAW"
 popup/item_1/id = 1
@@ -68,6 +71,8 @@ popup/item_2/text = "PULSE"
 popup/item_2/id = 2
 popup/item_3/text = "SQUARE"
 popup/item_3/id = 3
+popup/item_4/text = "NOISE"
+popup/item_4/id = 4
 
 [node name="CheckBox_Controls_Visible" type="CheckBox" parent="VBoxContainer/Controls/VBoxContainer/HFO"]
 layout_mode = 2
@@ -182,8 +187,11 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="AudioOsc2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamGenerator_gy5ml")
 script = ExtResource("3_o8jjk")
-envelope = SubResource("Curve_gic6r")
+env_enabled = false
+loop = false
+envelope = SubResource("Curve_eqp5x")
 
 [connection signal="toggled" from="VBoxContainer/Controls/VBoxContainer/HFO/CheckBox_Generating" to="." method="_on_check_box_generating_toggled"]
 [connection signal="toggled" from="VBoxContainer/Controls/VBoxContainer/HFO/CheckBox_Controls_Visible" to="." method="_on_controls_visible_box_toggled"]

@@ -1,3 +1,4 @@
+@tool
 extends AudioStreamPlayer2D
 class_name AudioOsc2D
 
@@ -33,8 +34,8 @@ var bus_name: StringName
 
 
 @export_category("OSC")
-enum {SIN,SAW, PULSE, SQUARE}
-@export_enum("SIN", "SAW", "PULSE", "SQUARE") var osc_type :int = SIN
+enum {SIN,SAW, PULSE, SQUARE, NOISE}
+@export_enum("SIN", "SAW", "PULSE", "SQUARE", "NOISE") var osc_type :int = SIN
 
 @export_range(0, 10, 0.001) var pitch: float = 0.99 :
 	set(value):
@@ -171,6 +172,10 @@ func audio_osc()->void:
 
 		SQUARE:
 			buffer = osc.get_square_buffer(playback.get_frames_available())
+			playback.push_buffer(buffer)
+		
+		NOISE:
+			buffer = osc.get_noise_buffer(playback.get_frames_available())
 			playback.push_buffer(buffer)
 			
 

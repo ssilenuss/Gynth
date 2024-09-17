@@ -20,6 +20,7 @@ void Osc::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_saw_buffer", "_size"), &Osc::get_saw_buffer);
 	ClassDB::bind_method(D_METHOD("get_pulse_buffer", "_size"), &Osc::get_pulse_buffer);
 	ClassDB::bind_method(D_METHOD("get_square_buffer", "_size"), &Osc::get_square_buffer);
+	ClassDB::bind_method(D_METHOD("get_noise_buffer", "_size"), &Osc::get_noise_buffer);
 }
 
 Osc::Osc() {
@@ -97,6 +98,21 @@ PackedVector2Array Osc::get_pulse_buffer(int _size) {
 	return buffer;
 }
 
+PackedVector2Array Osc::get_noise_buffer(int _size) {
+    
+	double increment = frequency/this->get_mix_rate();
+	to_fill = _size;
+	PackedVector2Array buffer = PackedVector2Array();
+	
+	while (to_fill > 0){
+		double frame = rand()/RAND_MAX;
+		frame = (frame*2.0)-1.0;
+		buffer.append(Vector2(1.0,1.0)*-frame);
+		to_fill -= 1;
+	}
+	return buffer;
+}
+
 PackedVector2Array Osc::get_square_buffer(int _size) {
     
 	double increment = frequency/this->get_mix_rate();
@@ -115,5 +131,6 @@ PackedVector2Array Osc::get_square_buffer(int _size) {
 		to_fill -= 1;
 	}
 	return buffer;
+	
 }
 
