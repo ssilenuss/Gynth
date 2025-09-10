@@ -105,9 +105,9 @@ PackedVector2Array Osc::get_noise_buffer(int _size) {
 	PackedVector2Array buffer = PackedVector2Array();
 	
 	while (to_fill > 0){
-		double frame = rand()/RAND_MAX;
+		double frame = rand()/double(RAND_MAX);
 		frame = (frame*2.0)-1.0;
-		buffer.append(Vector2(1.0,1.0)*-frame);
+		buffer.append(Vector2(1.0,1.0)*frame);
 		to_fill -= 1;
 	}
 	return buffer;
