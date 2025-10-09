@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwb8dtch26pml"]
+
+[ext_resource type="Script" uid="uid://cqa0rfinpbomr" path="res://GraphNodeGynth/GNG_Main.gd" id="1_nq3bi"]
+[ext_resource type="Script" uid="uid://dv5u5tkju7ebi" path="res://GraphNodeGynth/SynthNodes/SynthNodeOsc.gd" id="2_nq3bi"]
+[ext_resource type="Script" uid="uid://sbie3prhce45" path="res://GraphNodeGynth/SynthNodes/SynthNodeFrequencySlider.gd" id="3_ml4d7"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("graph")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nq3bi")
+graph = NodePath("VBoxContainer/GraphEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AddNodeButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "ADD NODE +"
+
+[node name="GraphEdit" type="GraphEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+right_disconnects = true
+
+[node name="SynthNodeOsc" type="GraphNode" parent="VBoxContainer/GraphEdit"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 137.0
+offset_right = 394.0
+offset_bottom = 214.0
+mouse_filter = 1
+position_offset = Vector2(230, 137)
+resizable = true
+script = ExtResource("2_nq3bi")
+metadata/_custom_type_script = "uid://dv5u5tkju7ebi"
+
+[node name="SynthNodeFrequencySlider" type="GraphNode" parent="VBoxContainer/GraphEdit"]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 201.0
+offset_right = 822.0
+offset_bottom = 325.0
+mouse_filter = 1
+position_offset = Vector2(570, 201)
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("3_ml4d7")
+metadata/_custom_type_script = "uid://sbie3prhce45"
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/GraphEdit/SynthNodeFrequencySlider"]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddNodeButton" to="." method="_on_add_node_button_pressed"]
+[connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_connection_request"]
+[connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_disconnection_request"]
+[connection signal="visibility_changed" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_visibility_changed"]

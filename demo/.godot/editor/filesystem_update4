@@ -1,3 +1,10 @@
 res://default_bus_layout.tres
-res://Scenes/Demo-3Osc.tscn
-res://Scenes/Gynth_Console_2D.tscn
+res://GraphNodeGynth/SynthNodes/SynthNodeOscillator.tscn
+res://GraphNodeGynth/SynthNodes/SynthNodeOsc.gd
+res://GraphNodeGynth/SynthNodes/AudioOut.tscn
+res://GraphNodeGynth/SynthNodes/SynthNodeAudioOut.gd
+res://GraphNodeGynth/GNG_Main.gd
+res://GraphNodeGynth/GNG_Main.tscn
+res://GraphNodeGynth/SynthNodes/Oscillator.tscn
+res://GraphNodeGynth/AudioOsc.gd
+res://GraphNodeGynth/SynthNode.gd
