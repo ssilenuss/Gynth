@@ -18,7 +18,9 @@ func spawn_audio_bus()->void:
 	AudioServer.add_bus()
 	var count: int = AudioServer.get_bus_count()
 	audiobus_idx = count-1
+	AudioServer.set_bus_name(audiobus_idx, self.title)
 	audiobus_name = AudioServer.get_bus_name(audiobus_idx)
+	set_title(audiobus_name)
 	
 	output_bus_name = AudioServer.get_bus_name(output_bus_idx)
 	AudioServer.set_bus_send(audiobus_idx, output_bus_name)
@@ -30,3 +32,5 @@ func _on_delete_request() -> void:
 	AudioServer.remove_bus(audiobus_idx)
 	print("Audio Bus Count: ", AudioServer.get_bus_count())
 	super()
+
+func _on_connection_request()

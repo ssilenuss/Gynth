@@ -1,3 +1,4 @@
+CheckButton      - Matches the "switch" keyword.
 Label
 HBoxContainer
 SpinBox

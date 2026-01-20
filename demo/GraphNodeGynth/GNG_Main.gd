@@ -8,6 +8,8 @@ var sn_offset := Vector2(10,10)
 
 func _ready() -> void:
 	OS.set_low_processor_usage_mode(true)
+	
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("delete"):

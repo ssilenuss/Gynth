@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwb8dtch26pml"]
 
 [ext_resource type="Script" uid="uid://cqa0rfinpbomr" path="res://GraphNodeGynth/GNG_Main.gd" id="1_nq3bi"]
-[ext_resource type="Script" uid="uid://dv5u5tkju7ebi" path="res://GraphNodeGynth/SynthNodes/SynthNodeOsc.gd" id="2_nq3bi"]
-[ext_resource type="Script" uid="uid://sbie3prhce45" path="res://GraphNodeGynth/SynthNodes/SynthNodeFrequencySlider.gd" id="3_ml4d7"]
+[ext_resource type="PackedScene" uid="uid://c7xjwuufe2foh" path="res://GraphNodeGynth/SynthNodes/Oscillator.tscn" id="2_nq3bi"]
+[ext_resource type="PackedScene" uid="uid://cpwg1xuhcnemu" path="res://GraphNodeGynth/SynthNodes/AudioOut.tscn" id="3_ml4d7"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("graph")]
 layout_mode = 3
@@ -36,40 +36,41 @@ layout_mode = 2
 size_flags_vertical = 3
 right_disconnects = true
 
-[node name="SynthNodeOsc" type="GraphNode" parent="VBoxContainer/GraphEdit"]
+[node name="SynthNodeOscillator" parent="VBoxContainer/GraphEdit" instance=ExtResource("2_nq3bi")]
 layout_mode = 0
-offset_left = 230.0
-offset_top = 137.0
-offset_right = 394.0
-offset_bottom = 214.0
+offset_left = 134.0
+offset_top = 509.0
+offset_right = 418.0
+offset_bottom = 680.0
 mouse_filter = 1
-position_offset = Vector2(230, 137)
-resizable = true
-script = ExtResource("2_nq3bi")
-metadata/_custom_type_script = "uid://dv5u5tkju7ebi"
+position_offset = Vector2(134, 509)
 
-[node name="SynthNodeFrequencySlider" type="GraphNode" parent="VBoxContainer/GraphEdit"]
+[node name="SynthNodeOscillator2" parent="VBoxContainer/GraphEdit" instance=ExtResource("2_nq3bi")]
 layout_mode = 0
-offset_left = 570.0
-offset_top = 201.0
-offset_right = 822.0
-offset_bottom = 325.0
+offset_left = 31.0
+offset_top = 252.0
+offset_right = 315.0
+offset_bottom = 423.0
 mouse_filter = 1
-position_offset = Vector2(570, 201)
-slot/0/left_enabled = false
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = false
-slot/0/right_type = 0
-slot/0/right_color = Color(1, 1, 1, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
-script = ExtResource("3_ml4d7")
-metadata/_custom_type_script = "uid://sbie3prhce45"
+position_offset = Vector2(31, 252)
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer/GraphEdit/SynthNodeFrequencySlider"]
-layout_mode = 2
+[node name="AudioOut" parent="VBoxContainer/GraphEdit" instance=ExtResource("3_ml4d7")]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 303.0
+offset_right = 902.0
+offset_bottom = 455.0
+mouse_filter = 1
+position_offset = Vector2(605, 303)
+
+[node name="AudioOut2" parent="VBoxContainer/GraphEdit" instance=ExtResource("3_ml4d7")]
+layout_mode = 0
+offset_left = 607.0
+offset_top = 85.0
+offset_right = 904.0
+offset_bottom = 237.0
+mouse_filter = 1
+position_offset = Vector2(607, 85)
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/AddNodeButton" to="." method="_on_add_node_button_pressed"]
 [connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_graph_edit_connection_request"]

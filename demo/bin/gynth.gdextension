@@ -7,6 +7,8 @@ compatibility_minimum = "4.2"
 
 macos.debug = "res://bin/libgdgynth.macos.template_debug.framework"
 macos.release = "res://bin/libgdgynth.macos.template_release.framework"
+web.debug = "res://bin/libgdgynth.web.template_debug.wasm32.wasm"
+web.release = "res://bin/libgdgynth.web.template_release.wasm32.wasm"
 windows.debug.x86_32 = "res://bin/libgdgynth.windows.template_debug.x86_32.dll"
 windows.release.x86_32 = "res://bin/libgdgynth.windows.template_release.x86_32.dll"
 windows.debug.x86_64 = "res://bin/libgdgynth.windows.template_debug.x86_64.dll"
